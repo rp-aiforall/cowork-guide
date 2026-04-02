@@ -1,881 +1,865 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
-</head>
-<body>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">*{box-sizing:border-box;margin:0;padding:0}</p>
-<p class="p1">body{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;line-height:1.7;color:var(--color-text-primary);background:var(--color-background-tertiary,#f5f5f3)}</p>
-<p class="p1">.shell{display:flex;height:100vh;overflow:hidden}</p>
-<p class="p2"><br></p>
-<p class="p1">/* Sidebar */</p>
-<p class="p1">.sidebar{width:272px;min-width:272px;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;overflow:hidden}</p>
-<p class="p1">.sidebar-header{padding:14px 16px 12px;border-bottom:0.5px solid var(--color-border-tertiary)}</p>
-<p class="p1">.sidebar-logo{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}</p>
-<p class="p1">.sidebar-title{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.35}</p>
-<p class="p1">.progress-bar-wrap{margin-top:9px;height:3px;background:var(--color-border-tertiary);border-radius:4px;overflow:hidden}</p>
-<p class="p1">.progress-bar-fill{height:100%;background:#378ADD;border-radius:4px;transition:width .4s}</p>
-<p class="p1">.progress-label{font-size:10px;color:var(--color-text-tertiary);margin-top:4px}</p>
-<p class="p2"><br></p>
-<p class="p1">/* Dept switcher */</p>
-<p class="p1">.dept-bar{padding:10px 12px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;gap:4px;flex-wrap:wrap}</p>
-<p class="p1">.dept-btn{font-size:11px;padding:4px 9px;border-radius:20px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;font-weight:400;transition:all .15s;white-space:nowrap}</p>
-<p class="p1">.dept-btn:hover{background:var(--color-background-tertiary);color:var(--color-text-primary)}</p>
-<p class="p1">.dept-btn.active{background:#185FA5;color:#fff;border-color:#185FA5;font-weight:500}</p>
-<p class="p1">.dept-btn.dept-fin{background:#EAF3DE;color:#27500A;border-color:#C0DD97}</p>
-<p class="p1">.dept-btn.dept-fin.active{background:#27500A;color:#fff;border-color:#27500A}</p>
-<p class="p1">.dept-btn.dept-sales{background:#FAEEDA;color:#633806;border-color:#FAC775}</p>
-<p class="p1">.dept-btn.dept-sales.active{background:#633806;color:#fff;border-color:#633806}</p>
-<p class="p1">.dept-btn.dept-eng{background:#EEEDFE;color:#3C3489;border-color:#CECBF6}</p>
-<p class="p1">.dept-btn.dept-eng.active{background:#3C3489;color:#fff;border-color:#3C3489}</p>
-<p class="p1">.dept-btn.dept-hr{background:#FAECE7;color:#4A1B0C;border-color:#F5C4B3}</p>
-<p class="p1">.dept-btn.dept-hr.active{background:#4A1B0C;color:#fff;border-color:#4A1B0C}</p>
-<p class="p1">.dept-btn.dept-mkt{background:#FBEAF0;color:#4B1528;border-color:#F4C0D1}</p>
-<p class="p1">.dept-btn.dept-mkt.active{background:#4B1528;color:#fff;border-color:#4B1528}</p>
-<p class="p1">.dept-btn.dept-legal{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4}</p>
-<p class="p1">.dept-btn.dept-legal.active{background:#0C447C;color:#fff;border-color:#0C447C}</p>
-<p class="p1">.dept-btn.dept-cs{background:#E1F5EE;color:#085041;border-color:#9FE1CB}</p>
-<p class="p1">.dept-btn.dept-cs.active{background:#085041;color:#fff;border-color:#085041}</p>
-<p class="p2"><br></p>
-<p class="p1">.sidebar-nav{flex:1;overflow-y:auto;padding:6px 0}</p>
-<p class="p1">.nav-group{padding:8px 14px 2px;font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}</p>
-<p class="p1">.nav-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:12.5px;color:var(--color-text-secondary);border:none;background:none;width:100%;text-align:left;transition:background .12s}</p>
-<p class="p1">.nav-item:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}</p>
-<p class="p1">.nav-item.active{background:var(--color-background-info,#E6F1FB);color:#185FA5;font-weight:500}</p>
-<p class="p1">.nav-item.active .nav-num{color:#378ADD}</p>
-<p class="p1">.nav-item.visited .check{opacity:1}</p>
-<p class="p1">.nav-num{font-size:10px;color:var(--color-text-tertiary);min-width:18px;font-variant-numeric:tabular-nums}</p>
-<p class="p1">.check{width:13px;height:13px;margin-left:auto;opacity:0;flex-shrink:0}</p>
-<p class="p1">.nav-divider{height:0.5px;background:var(--color-border-tertiary);margin:5px 0}</p>
-<p class="p1">.sidebar-footer{padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary)}</p>
-<p class="p1">.reset-btn{font-size:11px;color:var(--color-text-tertiary);background:none;border:none;cursor:pointer;padding:0}</p>
-<p class="p1">.reset-btn:hover{color:var(--color-text-secondary)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* Content */</p>
-<p class="p1">.content{flex:1;overflow-y:auto;padding:36px 44px 72px}</p>
-<p class="p1">.content-inner{max-width:740px}</p>
-<p class="p1">.section-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:10px;letter-spacing:.03em}</p>
-<p class="p1">.badge-core{background:#E6F1FB;color:#185FA5}</p>
-<p class="p1">.badge-fin{background:#EAF3DE;color:#27500A}</p>
-<p class="p1">.badge-sales{background:#FAEEDA;color:#633806}</p>
-<p class="p1">.badge-eng{background:#EEEDFE;color:#3C3489}</p>
-<p class="p1">.badge-hr{background:#FAECE7;color:#4A1B0C}</p>
-<p class="p1">.badge-mkt{background:#FBEAF0;color:#4B1528}</p>
-<p class="p1">.badge-legal{background:#E6F1FB;color:#0C447C}</p>
-<p class="p1">.badge-cs{background:#E1F5EE;color:#085041}</p>
-<p class="p1">h1{font-size:25px;font-weight:500;line-height:1.25;margin-bottom:6px}</p>
-<p class="p1">.subtitle{font-size:15px;color:var(--color-text-secondary);margin-bottom:22px;line-height:1.5}</p>
-<p class="p1">.section-body p{margin-bottom:14px}</p>
-<p class="p1">.info-box{border-left:3px solid #378ADD;background:#E6F1FB;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#185FA5}</p>
-<p class="p1">.warn-box{border-left:3px solid #EF9F27;background:#FAEEDA;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#633806}</p>
-<p class="p1">.success-box{border-left:3px solid #639922;background:#EAF3DE;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#27500A}</p>
-<p class="p1">h2{font-size:17px;font-weight:500;margin:24px 0 8px}</p>
-<p class="p1">h3{font-size:14px;font-weight:500;margin:18px 0 6px}</p>
-<p class="p1">ul,ol{margin:6px 0 12px 18px}</p>
-<p class="p1">li{margin-bottom:4px;font-size:14.5px}</p>
-<p class="p1">table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}</p>
-<p class="p1">th{background:var(--color-background-secondary);padding:7px 11px;text-align:left;font-weight:500;font-size:11.5px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}</p>
-<p class="p1">td{padding:8px 11px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}</p>
-<p class="p1">tr:last-child td{border-bottom:none}</p>
-<p class="p1">tr:nth-child(even) td{background:var(--color-background-secondary)}</p>
-<p class="p1">code{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:2px 5px;border-radius:4px}</p>
-<p class="p1">pre{background:#1e2330;border-radius:8px;padding:14px;margin:14px 0;overflow-x:auto}</p>
-<p class="p1">pre code{background:none;color:#c9d1e0;font-size:11.5px;padding:0}</p>
-<p class="p1">.step-flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:14px 0}</p>
-<p class="p1">.step-pill{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:5px 12px;font-size:12.5px;font-weight:500;white-space:nowrap}</p>
-<p class="p1">.step-arrow{color:var(--color-text-tertiary);font-size:13px}</p>
-<p class="p1">.screenshot-placeholder{background:var(--color-background-secondary);border:0.5px dashed var(--color-border-secondary);border-radius:8px;height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:14px 0;gap:7px}</p>
-<p class="p1">.screenshot-placeholder span{font-size:11.5px;color:var(--color-text-tertiary);text-align:center;max-width:240px;line-height:1.4;font-style:italic}</p>
-<p class="p1">.prompt-block{position:relative;background:#1e2330;border-radius:8px;padding:14px 44px 14px 14px;margin:10px 0}</p>
-<p class="p1">.prompt-block code{color:#c9d1e0;font-size:12px;white-space:pre-wrap;word-break:break-word;background:none;padding:0}</p>
-<p class="p1">.copy-btn{position:absolute;top:9px;right:9px;background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.15);border-radius:5px;padding:3px 8px;font-size:11px;color:#a0aabf;cursor:pointer;transition:all .15s}</p>
-<p class="p1">.copy-btn:hover{background:rgba(255,255,255,.14);color:#fff}</p>
-<p class="p1">.go-deeper{display:flex;align-items:center;gap:12px;margin-top:28px;padding:16px 18px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px}</p>
-<p class="p1">.go-deeper-text strong{font-size:13.5px;font-weight:500;display:block;margin-bottom:1px}</p>
-<p class="p1">.go-deeper-text span{font-size:12px;color:var(--color-text-secondary)}</p>
-<p class="p1">.go-deeper-btn{display:inline-flex;align-items:center;gap:5px;background:#185FA5;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:12.5px;font-weight:500;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .15s;flex-shrink:0}</p>
-<p class="p1">.go-deeper-btn:hover{background:#0C447C}</p>
-<p class="p1">.dept-banner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:13px}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="shell"&gt;</p>
-<p class="p1">&lt;aside class="sidebar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="sidebar-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sidebar-logo"&gt;RealPage&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sidebar-title"&gt;Claude Cowork Training Guide&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="progress-bar-wrap"&gt;&lt;div class="progress-bar-fill" id="pbar" style="width:0%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="progress-label" id="plabel"&gt;0 of 0 sections visited&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="dept-bar" id="dept-bar"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav class="sidebar-nav" id="nav"&gt;&lt;/nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="sidebar-footer"&gt;&lt;button class="reset-btn" onclick="resetProgress()"&gt;Reset progress&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/aside&gt;</p>
-<p class="p1">&lt;main class="content" id="main"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="content-inner" id="section-content"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/main&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">const DEPTS = [</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'core', label:'Core', cls:'', badgeCls:'badge-core', color:'#185FA5'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'fin',<span class="Apple-converted-space">  </span>label:'Finance', cls:'dept-fin', badgeCls:'badge-fin', color:'#27500A'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'sales',label:'Sales', cls:'dept-sales', badgeCls:'badge-sales', color:'#633806'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'eng',<span class="Apple-converted-space">  </span>label:'Product &amp; Eng', cls:'dept-eng', badgeCls:'badge-eng', color:'#3C3489'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'hr', <span class="Apple-converted-space">  </span>label:'HR / People', cls:'dept-hr', badgeCls:'badge-hr', color:'#4A1B0C'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'mkt',<span class="Apple-converted-space">  </span>label:'Marketing', cls:'dept-mkt', badgeCls:'badge-mkt', color:'#4B1528'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'legal',label:'Legal', cls:'dept-legal', badgeCls:'badge-legal', color:'#0C447C'},</p>
-<p class="p1"><span class="Apple-converted-space">  </span>{id:'cs', <span class="Apple-converted-space">  </span>label:'Customer Success', cls:'dept-cs', badgeCls:'badge-cs', color:'#085041'},</p>
-<p class="p1">];</p>
-<p class="p2"><br></p>
-<p class="p1">const ALL_SECTIONS = [</p>
-<p class="p1">// ── CORE ──────────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'core',id:'c-welcome',num:'01',group:'Getting Started',title:'Welcome &amp; overview',subtitle:'What Cowork is and how this guide works.',</p>
-<p class="p1">content:`&lt;p&gt;This guide covers everything you need to start using Claude Cowork — Anthropic's desktop AI agent that executes real tasks on your computer, not just answers questions.&lt;/p&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Use the department tabs above the sidebar to navigate to role-specific modules after completing the core sections.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;What you'll learn&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;How Cowork differs from Claude Chat&lt;/li&gt;&lt;li&gt;How to set it up on your Windows PC&lt;/li&gt;&lt;li&gt;How to connect Microsoft 365 (Outlook, Teams, OneDrive, SharePoint)&lt;/li&gt;&lt;li&gt;How to write tasks that get great results&lt;/li&gt;&lt;li&gt;Department-specific workflows for your role&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;How to use this guide&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;Work through the &lt;strong&gt;Core&lt;/strong&gt; sections first (01–08). Then switch to your department tab for role-specific prompts and workflows. Every section ends with a &lt;strong&gt;Practice with Claude&lt;/strong&gt; button that opens a live, pre-loaded conversation.&lt;/p&gt;`,</p>
-<p class="p1">prompt:'I\'m starting to learn Claude Cowork at RealPage. Give me a plain-English overview of what it is, how it differs from Claude Chat, and the 3 most important things I should set up first.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-whatis',num:'02',group:'Getting Started',title:'Cowork vs. Chat vs. Code',subtitle:'Which tool to use and when.',</p>
-<p class="p1">content:`&lt;p&gt;Claude has three modes. Picking the right one makes a big difference.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Claude Chat&lt;/th&gt;&lt;th&gt;Claude Cowork&lt;/th&gt;&lt;th&gt;Claude Code&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Best for&lt;/td&gt;&lt;td&gt;Questions, brainstorming, drafts&lt;/td&gt;&lt;td&gt;Autonomous file work &amp; workflows&lt;/td&gt;&lt;td&gt;Software development&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;How you interact&lt;/td&gt;&lt;td&gt;Back-and-forth conversation&lt;/td&gt;&lt;td&gt;Describe outcome, step away&lt;/td&gt;&lt;td&gt;Hands-on coding with Claude&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;File access&lt;/td&gt;&lt;td&gt;Upload manually each time&lt;/td&gt;&lt;td&gt;Persistent folder access, read/write&lt;/td&gt;&lt;td&gt;Full project directory&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Scheduling&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes — daily, weekly tasks&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Integrations&lt;/td&gt;&lt;td&gt;None&lt;/td&gt;&lt;td&gt;M365, Teams, Slack, CRM, and more&lt;/td&gt;&lt;td&gt;Git, package managers&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Rule of thumb: brainstorm in Chat → execute in Cowork → build software in Code.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;What Cowork can do with your files&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Read Excel, Word, PDF, PowerPoint files&lt;/li&gt;&lt;li&gt;Create new spreadsheets, reports, and presentations&lt;/li&gt;&lt;li&gt;Rename, sort, and organize folders&lt;/li&gt;&lt;li&gt;Extract and summarize data across many documents&lt;/li&gt;&lt;li&gt;Run tasks on a schedule (e.g., every Monday at 8 AM)&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Cowork only accesses folders you explicitly grant it permission to see. It always shows its plan before taking significant actions and will never permanently delete a file without your approval.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Give me 5 examples of tasks I should handle in Claude Chat vs. 5 that belong in Claude Cowork. I work at RealPage and use Microsoft 365.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-install',num:'03',group:'Setup',title:'Download &amp; install',subtitle:'Get Claude Desktop running on Windows.',</p>
-<p class="p1">content:`&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Go to claude.com/download&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Click Windows download&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Run the .exe installer&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Launch from Start menu&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Claude Desktop installer and Windows Start menu shortcut&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;The Claude Desktop app must stay open while a task is running. If you close it, the task stops.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Log in&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;Sign in with your RealPage enterprise credentials — the same email you use for Claude in the browser. No new account needed.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;Switch to Cowork mode&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;At the top of Claude Desktop, click the &lt;strong&gt;Cowork&lt;/strong&gt; tab.&lt;/p&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Chat&lt;/div&gt;&lt;div class="step-arrow"&gt;|&lt;/div&gt;&lt;div class="step-pill" style="background:#E6F1FB;color:#185FA5;border-color:#B5D4F4"&gt;Cowork ✓&lt;/div&gt;&lt;div class="step-arrow"&gt;|&lt;/div&gt;&lt;div class="step-pill"&gt;Code&lt;/div&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I just installed Claude Desktop at RealPage. Walk me through the Cowork tab setup — what should I configure in the first 10 minutes to get the most value?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-folder',num:'04',group:'Setup',title:'Create your work folder',subtitle:'Set up a safe, dedicated space for Cowork to access.',</p>
-<p class="p1">content:`&lt;p&gt;Before giving Cowork access to files, create a dedicated folder. Start narrow — don't point Cowork at your entire Documents folder until you're comfortable with how it works.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;Suggested folder structure&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;Claude_Work/</p>
-<p class="p1">├── context/</p>
-<p class="p1">│ <span class="Apple-converted-space">  </span>├── about-me.md<span class="Apple-converted-space">        </span>← your role, preferences, standing rules</p>
-<p class="p1">│ <span class="Apple-converted-space">  </span>└── current-projects.md ← what you're working on right now</p>
-<p class="p1">├── Inbox/ <span class="Apple-converted-space">                </span>← files to process</p>
-<p class="p1">├── Drafts/<span class="Apple-converted-space">                </span>← outputs in progress</p>
-<p class="p1">└── Archive/&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Click "Work in a Folder"&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Select Claude_Work&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Select "Always Allow"&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Folder permission dialog in Cowork&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Context files — brief Cowork once, not every session&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;Create an &lt;code&gt;about-me.md&lt;/code&gt; with your name, role, formatting preferences, and standing rules. Reference it at the start of any task:&lt;/p&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read about-me.md and current-projects.md before starting. Then..."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me write an about-me.md context file for Claude Cowork. Ask me a few questions about my role and preferences at RealPage, then draft the file.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-m365',num:'05',group:'Setup',title:'Connect Microsoft 365',subtitle:'Give Cowork access to Outlook, Teams, OneDrive, and SharePoint.',</p>
-<p class="p1">content:`&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Click "+" in Cowork&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Connectors&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Toggle Microsoft 365&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Complete OAuth sign-in&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Connectors panel showing Microsoft 365 toggle enabled&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;App&lt;/th&gt;&lt;th&gt;What Claude can do&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Outlook&lt;/td&gt;&lt;td&gt;Read, search, draft emails; summarize threads; flag action items&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Teams&lt;/td&gt;&lt;td&gt;Read channels and threads; summarize conversations; draft replies&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;OneDrive&lt;/td&gt;&lt;td&gt;Search and fetch files without downloading&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;SharePoint&lt;/td&gt;&lt;td&gt;Access shared document libraries and site files&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Excel / Word / PowerPoint&lt;/td&gt;&lt;td&gt;Read content directly for analysis or rebuilding&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;Local folder vs. M365 connector&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Capability&lt;/th&gt;&lt;th&gt;Local folder&lt;/th&gt;&lt;th&gt;With M365 connector&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Read local Office files&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Access SharePoint libraries&lt;/td&gt;&lt;td&gt;❌&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Read Teams channels&lt;/td&gt;&lt;td&gt;❌&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Draft &amp; save Outlook emails&lt;/td&gt;&lt;td&gt;❌&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Access OneDrive without downloading&lt;/td&gt;&lt;td&gt;❌&lt;/td&gt;&lt;td&gt;✅&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;RealPage primarily uses Teams. If your team also uses Slack, you can connect it from the same Connectors panel.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I just connected Microsoft 365 in Claude Cowork. Give me 5 practical workflows I can now run using Outlook, Teams, and SharePoint that I couldn\'t do with local files alone.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-global',num:'06',group:'Setup',title:'Global instructions',subtitle:'Set your preferences once — applied to every session.',</p>
-<p class="p1">content:`&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Settings → Cowork&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Edit Global Instructions&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Save&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Starter template — customize for your role&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;I work at RealPage in [your department]. I use Microsoft 365 — Outlook,<span class="Apple-converted-space"> </span></p>
-<p class="p1">Teams, OneDrive, Excel, Word, and PowerPoint. Use professional language<span class="Apple-converted-space"> </span></p>
-<p class="p1">appropriate for internal business communication. When creating documents,<span class="Apple-converted-space"> </span></p>
-<p class="p1">include an executive summary at the top. Flag anything that looks<span class="Apple-converted-space"> </span></p>
-<p class="p1">unusual or needs my review. Save outputs as new files — never modify<span class="Apple-converted-space"> </span></p>
-<p class="p1">the originals.&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;The safety meta-prompt&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;Add this to the start of any complex task to prevent common mistakes:&lt;/p&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;When working on this task: ask a clarifying question if anything is<span class="Apple-converted-space"> </span></p>
-<p class="p1">ambiguous, narrate what you're doing at each step, and pause before<span class="Apple-converted-space"> </span></p>
-<p class="p1">any action that deletes or overwrites a file. Save all outputs as new<span class="Apple-converted-space"> </span></p>
-<p class="p1">files rather than modifying originals.&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me write Global Instructions for Claude Cowork. I work at RealPage — ask me about my role and tools, then generate the text I should paste into Settings.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-tasks',num:'07',group:'Running Tasks',title:'Writing a good task',subtitle:'How to brief Cowork like a smart colleague.',</p>
-<p class="p1">content:`&lt;p&gt;Don't ask Claude a question — give it a clear assignment. A good task answers three things:&lt;/p&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Input:&lt;/strong&gt; which files or data?&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Output:&lt;/strong&gt; what file, format, or result?&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Rules:&lt;/strong&gt; any naming conventions, flags, or formatting preferences?&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;Before vs. after&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Weak&lt;/th&gt;&lt;th&gt;Strong&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;"Help me with this report."&lt;/td&gt;&lt;td&gt;"I have Q1 data in 'Sales_Q1.xlsx'. Summarize it by region, create a Word doc called 'Q1_Summary.docx' with an executive summary at the top, and flag any region down more than 10% vs. last quarter."&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;"Organize my downloads."&lt;/td&gt;&lt;td&gt;"Sort all files in the Inbox folder by type. Rename PDFs as YYYY-MM-DD-description.pdf. Move images to Archive/Images, docs to Drafts. Flag anything older than 90 days."&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Add "then review it and fix any issues" to the end of any request — Claude will self-check before saving. It catches most errors automatically.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Mid-task instructions&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;If you think of something while Cowork is running, click &lt;strong&gt;+&lt;/strong&gt; to queue an additional instruction. It adds it without starting over.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;Choosing the right model&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model&lt;/th&gt;&lt;th&gt;Best for&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Haiku&lt;/td&gt;&lt;td&gt;Quick formatting, simple Q&amp;A, grammar checks&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Sonnet&lt;/td&gt;&lt;td&gt;Most everyday tasks — reports, analysis, drafts&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Opus&lt;/td&gt;&lt;td&gt;Complex, multi-step reasoning tasks&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'Give me 6 examples of weak Cowork task prompts rewritten as strong ones, covering a mix of document creation, file organization, email drafting, and data analysis. I work at RealPage.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-schedule',num:'08',group:'Running Tasks',title:'Scheduled tasks',subtitle:'Set recurring tasks once — Cowork runs them automatically.',</p>
-<p class="p1">content:`&lt;p&gt;Cowork can re-run any workflow on a schedule. Describe the task, then add a frequency — Claude handles the rest.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;Two ways to schedule&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Type /schedule in any Cowork task&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Describe the task&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Set the frequency&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Confirm&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Or go to &lt;strong&gt;Settings → Cowork → Scheduled Tasks&lt;/strong&gt; to manage all active schedules in one place.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Frequency&lt;/th&gt;&lt;th&gt;Example phrase&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Daily&lt;/td&gt;&lt;td&gt;"Every weekday at 8:30 AM"&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Weekly&lt;/td&gt;&lt;td&gt;"Every Monday at 9:00 AM"&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Monthly&lt;/td&gt;&lt;td&gt;"First business day of each month"&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Custom&lt;/td&gt;&lt;td&gt;Cron syntax: &lt;code&gt;0 9 * * 1-5&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;Starter scheduled tasks for any RealPage employee&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Task&lt;/th&gt;&lt;th&gt;Schedule&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Morning briefing — unread Outlook emails + Teams highlights + today's calendar&lt;/td&gt;&lt;td&gt;Weekdays, 8:30 AM&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Weekly summary of new files added to your work folder&lt;/td&gt;&lt;td&gt;Monday, 9:00 AM&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Inbox cleanup — sort and rename files added this week&lt;/td&gt;&lt;td&gt;Friday, 5:00 PM&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Monthly report draft from recurring data source&lt;/td&gt;&lt;td&gt;1st of each month, 8:00 AM&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;Morning briefing prompt — copy and schedule&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Every weekday at 8:30 AM: pull my unread Outlook emails from the<span class="Apple-converted-space"> </span></p>
-<p class="p1">last 18 hours (subject, sender, one-line summary), read the last<span class="Apple-converted-space"> </span></p>
-<p class="p1">24 hours of my key Teams channels, and list today's calendar events.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Compile into a Word doc called 'Briefing_[Date].docx' in my Drafts folder."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Scheduled tasks only run while Claude Desktop is open and your computer is awake. For reliable automation, keep the app running during working hours. Missed tasks run automatically the next time the app opens.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me set up 3 scheduled recurring tasks in Claude Cowork that would save me real time each week — a morning briefing from Outlook and Teams, a weekly file summary, and one task specific to my role. Walk me through the /schedule command and what each prompt should include.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-projects',num:'09',group:'Running Tasks',title:'Projects',subtitle:'Give Claude a permanent desk for each area of your work.',</p>
-<p class="p1">content:`&lt;p&gt;A Project is a persistent workspace in Claude — it has its own memory, instructions, files, and scheduled tasks that carry over between sessions. Think of it as assigning Claude a dedicated role for one part of your job.&lt;/p&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Without Projects, every new chat starts blank. With a Project, Claude already knows your context, preferences, and what you're working on — no re-briefing needed.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;What a Project gives you&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Feature&lt;/th&gt;&lt;th&gt;What it means in practice&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Persistent instructions&lt;/td&gt;&lt;td&gt;Set rules once — "always use USD, flag items over $25K, use our report template" — and they apply to every task in that project&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Persistent files&lt;/td&gt;&lt;td&gt;Upload your chart of accounts, style guide, or report template once; Claude references it every session without reprocessing&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Scoped memory&lt;/td&gt;&lt;td&gt;Claude remembers decisions, preferences, and past work within the project across sessions&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Isolated scheduled tasks&lt;/td&gt;&lt;td&gt;Recurring tasks are tied to the project, not the chat&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;Good candidates for a dedicated Project&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Weekly or monthly reports you run on a recurring cycle&lt;/li&gt;&lt;li&gt;A content pipeline or campaign you manage ongoing&lt;/li&gt;&lt;li&gt;A long-running client or account relationship&lt;/li&gt;&lt;li&gt;Your team's recurring operations (close process, sprint cycle, hiring pipeline)&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;How to create a Project&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Click Projects in sidebar&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;New Project&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Add instructions&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Upload reference files&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Start working&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Projects panel showing active projects with instruction summaries&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Project instructions template&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;Project: [Name]</p>
-<p class="p1">Purpose: [What this project handles]</p>
-<p class="p1">My role: [Your title and team]</p>
-<p class="p1">Output format: [e.g., "Always save as .docx with executive summary at top"]</p>
-<p class="p1">Standing rules: [e.g., "Flag anything over $25K", "Use USD", "Professional tone"]</p>
-<p class="p1">Reference files in this project: [list key files Claude should always use]</p>
-<p class="p1">Do not: [anything Claude should never do in this context]&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me set up a Claude Project for the most important recurring work I do. Ask me about my role and what workflows I run repeatedly, then recommend how many projects I should create and what instructions to put in each one.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-memory',num:'10',group:'Running Tasks',title:'Persistent memory',subtitle:'Claude remembers your preferences across every session.',</p>
-<p class="p1">content:`&lt;p&gt;On paid plans, Claude maintains a memory of facts about you and your work that persists across all conversations — not just within a single chat or project. You can view, edit, and delete these memories at any time.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;What memory is good for&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Your role, team, and company context — so you never have to re-introduce yourself&lt;/li&gt;&lt;li&gt;Preferred output formats ("always use bullet points for action items", "executive summary first")&lt;/li&gt;&lt;li&gt;Recurring project names and acronyms Claude should recognize&lt;/li&gt;&lt;li&gt;Standing rules ("always flag items over $25K", "never modify original files")&lt;/li&gt;&lt;li&gt;Tool preferences ("I use Excel, not Google Sheets", "I work in Teams not Slack")&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;How to set it up&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Settings → Memory&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;View existing memories&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Edit or add entries&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Claude also builds memory automatically from your conversations. Review it periodically — if Claude learned something wrong, edit it directly in Settings → Memory.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Starter memory entries for RealPage employees&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;I work in [Department] at RealPage. My role is [Title].</p>
-<p class="p1">I use Microsoft 365 — Outlook, Teams, OneDrive, Excel, Word, PowerPoint.</p>
-<p class="p1">My primary Teams channel for [work area] is [channel name].</p>
-<p class="p1">Output format preference: executive summary first, bullet points for action items.</p>
-<p class="p1">Always use USD currency formatting.</p>
-<p class="p1">Never modify original files — always save outputs as new files.</p>
-<p class="p1">Flag anything unusual or that needs my review.</p>
-<p class="p1">Acronyms I use: [list your team's acronyms and what they mean]&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Memory is stored per user account, not per device. It applies across Claude Chat, Cowork, and Code on all your devices.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me set up my Claude persistent memory for working at RealPage. Ask me about my role, tools, formatting preferences, and standing rules — then generate the memory entries I should add in Settings → Memory.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-artifacts',num:'11',group:'Running Tasks',title:'Artifacts',subtitle:'A live canvas for documents you build and refine iteratively.',</p>
-<p class="p1">content:`&lt;p&gt;When Claude creates a document, report, spreadsheet, or piece of code, it can open it in an Artifact panel — a persistent side-by-side workspace next to the chat. Instead of scrolling through long messages, you work in the Artifact directly.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;When Artifacts are most useful&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Use case&lt;/th&gt;&lt;th&gt;Why Artifacts help&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Drafting a report or document&lt;/td&gt;&lt;td&gt;The document stays open while you give feedback in chat — Claude updates it in place&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Building a structured template&lt;/td&gt;&lt;td&gt;Iterate on structure and content without losing the whole doc in chat history&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Creating a dashboard or data visualization&lt;/td&gt;&lt;td&gt;See it render live as Claude builds it&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Writing and refining a prompt&lt;/td&gt;&lt;td&gt;Keep the prompt in the Artifact, test and adjust it in chat&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;How to use Artifacts&lt;/h2&gt;</p>
-<p class="p1">&lt;p&gt;You don't need to do anything special — when Claude produces something substantial (a document, structured output, or code), it opens in the Artifact panel automatically. You can then:&lt;/p&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Ask Claude to revise specific sections without rewriting the whole thing&lt;/li&gt;&lt;li&gt;Copy the final version directly from the Artifact pane&lt;/li&gt;&lt;li&gt;Download it as a file&lt;/li&gt;&lt;li&gt;Ask Claude to keep working on it across multiple turns&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Practical tip: when drafting a Word report or slide outline, say "keep this in an Artifact and update it as we refine it." This keeps the document clean and separate from your instructions, rather than re-pasting the whole thing every turn.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Example — iterative report drafting&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Draft a Q1 performance summary based on the data in this folder.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Keep it in an Artifact. I'll give you feedback section by section<span class="Apple-converted-space"> </span></p>
-<p class="p1">and you update it in place. Start with the executive summary."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Explain how Claude Artifacts work and show me how to use them to iteratively draft and refine a business report. I want to understand how to give section-by-section feedback without losing the document.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-computer',num:'12',group:'Running Tasks',title:'Computer use',subtitle:'Claude controls your desktop when no connector exists.',</p>
-<p class="p1">content:`&lt;p&gt;On Pro and Max plans, Cowork can take control of your actual desktop — moving the mouse, clicking, typing, and interacting with apps that have no API or connector.&lt;/p&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Use computer use only when no MCP connector or browser integration can handle the task. It's slower and uses more resources than a direct API connection — but it's the only option for legacy tools, internal dashboards, and systems without public APIs.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;What Claude can do&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Take screenshots to see your current screen state&lt;/li&gt;&lt;li&gt;Click buttons, links, checkboxes, and menus&lt;/li&gt;&lt;li&gt;Type text and fill forms&lt;/li&gt;&lt;li&gt;Navigate between applications&lt;/li&gt;&lt;li&gt;Execute keyboard shortcuts&lt;/li&gt;&lt;li&gt;Interact with native Windows apps&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;Good use cases at RealPage&lt;/h2&gt;</p>
-<p class="p1">&lt;ul&gt;&lt;li&gt;Internal tools and dashboards with no API access&lt;/li&gt;&lt;li&gt;Legacy systems that predate modern integrations&lt;/li&gt;&lt;li&gt;Web portals that require complex login flows&lt;/li&gt;&lt;li&gt;Repetitive copy-paste work between apps that can't be connected directly&lt;/li&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;h2&gt;Permission tiers&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Tier&lt;/th&gt;&lt;th&gt;What Claude can access&lt;/th&gt;&lt;th&gt;When to use&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;UI Only&lt;/td&gt;&lt;td&gt;Visual elements — text, buttons, forms&lt;/td&gt;&lt;td&gt;Default — lowest risk&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;App Control&lt;/td&gt;&lt;td&gt;Can open and interact with specific apps&lt;/td&gt;&lt;td&gt;Automating native apps&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;System Access&lt;/td&gt;&lt;td&gt;File system, settings, system commands&lt;/td&gt;&lt;td&gt;Advanced only&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Computer use runs on your real desktop — not in a sandbox. Your screen must be active (not locked). Claude will ask permission before accessing each new application. Available on Pro and Max plans only. Never use it with banking apps, password managers, or security software.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;How to enable it&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="step-flow"&gt;&lt;div class="step-pill"&gt;Open a Cowork task&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Click "Use Computer"&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Grant app permission when prompted&lt;/div&gt;&lt;div class="step-arrow"&gt;→&lt;/div&gt;&lt;div class="step-pill"&gt;Describe what you want done&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Computer use permission dialog in Claude Desktop&lt;/span&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Explain how Claude computer use works in Cowork and when I should use it vs. an MCP connector or browser automation. Give me 3 examples of real tasks at a company like RealPage where computer use would be the right choice.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'core',id:'c-efficiency',num:'13',group:'Running Tasks',title:'Token efficiency',subtitle:'Get more done per session with a few simple habits.',</p>
-<p class="p1">content:`&lt;p&gt;Claude limits by tokens — the total amount of text processed per session. Every message re-reads the full conversation history, so long chats get expensive fast. A few habits make a real difference.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Habit&lt;/th&gt;&lt;th&gt;Why it helps&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Edit your prompt instead of sending a correction&lt;/td&gt;&lt;td&gt;Replaces the exchange instead of stacking it — Claude re-reads less&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Start a fresh chat every 15–20 messages&lt;/td&gt;&lt;td&gt;Ask Claude to summarize → copy → paste as first message in new chat&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Batch multiple questions into one message&lt;/td&gt;&lt;td&gt;Three tasks in one prompt = one context load, not three&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Use Projects for recurring reference files&lt;/td&gt;&lt;td&gt;Upload once; every session in that project references it without reprocessing&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Set Memory &amp; Preferences once&lt;/td&gt;&lt;td&gt;Stops you re-explaining "I work in Finance at RealPage..." every session&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Turn off Search and Tools when not needed&lt;/td&gt;&lt;td&gt;Tools add tokens to every response even when unused&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Spread work across the day&lt;/td&gt;&lt;td&gt;Claude uses a rolling 5-hour usage window — two sessions beats one marathon&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;h2&gt;Choosing the right model&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Model&lt;/th&gt;&lt;th&gt;Best for&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Haiku&lt;/td&gt;&lt;td&gt;Quick formatting, grammar checks, simple Q&amp;A&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Sonnet&lt;/td&gt;&lt;td&gt;Most everyday work — reports, analysis, drafts, data tasks&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Opus&lt;/td&gt;&lt;td&gt;Complex multi-step reasoning, deep analysis, hard problems&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;For most file organization, report drafting, and data extraction tasks, Sonnet is the right choice. Save Opus for tasks where a first Sonnet attempt wasn't sufficient.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Give me a practical cheat sheet for using Claude Cowork efficiently. What are the most important habits to avoid hitting token limits, and how do I choose between Haiku, Sonnet, and Opus for different types of work?'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── FINANCE ───────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'fin',id:'f-overview',num:'F1',group:'Finance Module',title:'Finance overview',subtitle:'What Cowork can do for the Finance org at RealPage.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#EAF3DE;border:0.5px solid #C0DD97"&gt;&lt;span style="font-size:20px"&gt;📊&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#27500A"&gt;Finance Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#3B6D11;font-size:12px"&gt;Complete the Core sections first, then work through these Finance-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Cowork is particularly powerful for Finance because so much Finance work follows repeatable patterns: extract data from files, compare two datasets, flag anomalies, produce a formatted output. These are exactly the tasks Cowork was built for.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;High-value Finance workflows covered in this module&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Time saved&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Invoice extraction and organization&lt;/td&gt;&lt;td&gt;Hours → minutes&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;AP/AR reconciliation against bank statements&lt;/td&gt;&lt;td&gt;Manual matching → automated output&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Budget vs. actuals variance analysis&lt;/td&gt;&lt;td&gt;Build + format in one step&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Multi-entity consolidation&lt;/td&gt;&lt;td&gt;Template-driven rebuild&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Month-end close tracking and status updates&lt;/td&gt;&lt;td&gt;Automated tracker + Teams post&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Audit support schedule preparation&lt;/td&gt;&lt;td&gt;Index + PBC matching automated&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
-<p class="p1">&lt;div class="info-box"&gt;Install the Financial Analysis plugin before starting: Customize → Browse Plugins → Finance → Financial Analysis. It significantly improves accuracy on reconciliation and modeling tasks.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I work in Finance at RealPage. Give me an overview of the top 5 ways Claude Cowork can save me time on everyday Finance tasks — focus on Excel-heavy work, AP/AR, and month-end close.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'fin',id:'f-invoices',num:'F2',group:'Finance Module',title:'Invoice processing',subtitle:'Sort, rename, and extract invoice data at scale.',</p>
-<p class="p1">content:`&lt;div class="prompt-block"&gt;&lt;code&gt;"I have a folder of PDF invoices. Organize them into subfolders by<span class="Apple-converted-space"> </span></p>
-<p class="p1">month. Within each month folder, create a subfolder per currency<span class="Apple-converted-space"> </span></p>
-<p class="p1">(USD, EUR, etc.). Read each PDF to extract invoice date and currency."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Extract to Excel summary&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read all PDFs in Invoices_To_Process. Extract: Vendor Name, Invoice<span class="Apple-converted-space"> </span></p>
-<p class="p1">Date, Invoice Number, Total Amount. Create 'Invoice_Summary_[Month].xlsx'<span class="Apple-converted-space"> </span></p>
-<p class="p1">with those four columns. Sort by Vendor Name. Flag invoices over $10,000<span class="Apple-converted-space"> </span></p>
-<p class="p1">in a 'Review Flag' column."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Rename after sorting&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Rename all PDFs using the format: VendorName_Date_Amount.pdf"&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="screenshot-placeholder"&gt;&lt;span&gt;Screenshot: Cowork progress panel showing PDF reads and Excel output&lt;/span&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Walk me through using Claude Cowork to process a folder of 40 vendor invoices — sorting, renaming, and extracting data to Excel. What should I verify to make sure the output is accurate?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'fin',id:'f-recon',num:'F3',group:'Finance Module',title:'Reconciliation',subtitle:'Match invoices to bank statements automatically.',</p>
-<p class="p1">content:`&lt;div class="prompt-block"&gt;&lt;code&gt;"Reconcile the invoices in this folder against the bank statement in<span class="Apple-converted-space"> </span></p>
-<p class="p1">'BankStatement_[Month].xlsx'. Create an Excel file with tabs for:<span class="Apple-converted-space"> </span></p>
-<p class="p1">Matched invoices, Amount mismatches, Unpaid invoices, and Bank<span class="Apple-converted-space"> </span></p>
-<p class="p1">transactions with no matching invoice. Flag duplicate invoice numbers."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Three-way match (PO + invoice + receipt)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"I have three folders: POs (PDFs), Invoices (PDFs), and GoodsReceipts<span class="Apple-converted-space"> </span></p>
-<p class="p1">(Excel). Match each invoice to its PO and goods receipt by PO number.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Create 'ThreeWayMatch_[Month].xlsx' with columns: PO#, Vendor, PO Amount,<span class="Apple-converted-space"> </span></p>
-<p class="p1">Invoice Amount, Receipt Amount, Match Status, and Flag."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Always verify figures in the output before using for reporting. Ask Cowork to show its underlying calculations so you can spot-check.&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build an AP reconciliation workflow in Claude Cowork. What format should my bank statement export be in? How should I handle edge cases like partial payments and duplicate invoice numbers?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'fin',id:'f-bva',num:'F4',group:'Finance Module',title:'Variance analysis &amp; FP&amp;A',subtitle:'BvA, rolling forecasts, and scenario models.',</p>
-<p class="p1">content:`&lt;h2&gt;Budget vs. actuals&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Compare 'Budget_Q1.xlsx' and 'Actuals_Q1.xlsx' by department and line<span class="Apple-converted-space"> </span></p>
-<p class="p1">item. Create 'Q1_Variance_Analysis.xlsx' with Budget, Actual, Variance ($),<span class="Apple-converted-space"> </span></p>
-<p class="p1">Variance (%) columns. Flag rows where variance exceeds 10% either<span class="Apple-converted-space"> </span></p>
-<p class="p1">direction. Use green/red conditional formatting."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Rolling forecast update&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Update 'Forecast_Q2_2026.xlsx' by replacing Q1 forecast figures with<span class="Apple-converted-space"> </span></p>
-<p class="p1">Q1 actuals from 'Actuals_Q1_2026.xlsx'. Keep Q2–Q4 unchanged. Add a<span class="Apple-converted-space"> </span></p>
-<p class="p1">Last Updated timestamp and a full-year summary tab."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Three-scenario model&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Using 'Budget_FY2026.xlsx' as base, build a three-scenario model<span class="Apple-converted-space"> </span></p>
-<p class="p1">(Base, Upside +10% revenue, Downside -15% revenue) in<span class="Apple-converted-space"> </span></p>
-<p class="p1">'Scenario_Model_FY2026.xlsx'. Show impact on gross margin, EBITDA,<span class="Apple-converted-space"> </span></p>
-<p class="p1">and cash on a summary tab."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a rolling 12-month forecast model in Claude Cowork. My current forecast is in Excel and I need to lock in Q1 actuals. Walk me through the prompt sequence.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'fin',id:'f-close',num:'F5',group:'Finance Module',title:'Month-end close',subtitle:'Trackers, flux analysis, and Teams status updates.',</p>
-<p class="p1">content:`&lt;h2&gt;Close tracker&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Create 'MonthEnd_Close_Tracker_[Month].xlsx' with a Checklist tab:<span class="Apple-converted-space"> </span></p>
-<p class="p1">Task, Owner, Due Date, Status, Notes. Pre-populate with: bank recon,<span class="Apple-converted-space"> </span></p>
-<p class="p1">AR aging review, AP accruals, intercompany eliminations, flux analysis,<span class="Apple-converted-space"> </span></p>
-<p class="p1">management reporting package. Highlight overdue items in red."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Flux analysis&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Compare 'Actuals_[Month].xlsx' vs 'Actuals_[Prior Month].xlsx'.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Create a flux analysis showing change by line item. Flag any line<span class="Apple-converted-space"> </span></p>
-<p class="p1">with month-over-month change greater than 15% or $50K. Include a<span class="Apple-converted-space"> </span></p>
-<p class="p1">commentary column."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Teams status update (M365 connector required)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Using the close tracker, draft a brief status update for the<span class="Apple-converted-space"> </span></p>
-<p class="p1">Finance-Close Teams channel: overall % complete, items at risk,<span class="Apple-converted-space"> </span></p>
-<p class="p1">blockers. Under 150 words, professional tone."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Scheduled close reminder&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"On the 25th of every month at 9 AM, read the close tracker and<span class="Apple-converted-space"> </span></p>
-<p class="p1">summarize all Open tasks due within 5 days."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a month-end close support workflow in Claude Cowork — close tracker, flux analysis, and automated Teams status update. What should I verify before sharing outputs with leadership?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'fin',id:'f-audit',num:'F6',group:'Finance Module',title:'Audit &amp; compliance',subtitle:'Audit schedules, duplicate detection, PBC lists, SOX summaries.',</p>
-<p class="p1">content:`&lt;div class="warn-box"&gt;Cowork activity is not captured in RealPage's audit logs. Do not use Cowork for regulated workloads requiring an audit trail until IT/Security confirms it is appropriate.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Audit support index&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Create an audit support index in Excel listing each file in the<span class="Apple-converted-space"> </span></p>
-<p class="p1">Reconciliation folder, the schedule it supports (e.g., 'Cash – Note 4'),<span class="Apple-converted-space"> </span></p>
-<p class="p1">preparer, and review status (leave blank for me to fill in)."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Duplicate payment detection&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Payments_Q1_2026.xlsx'. Identify duplicate payments — same<span class="Apple-converted-space"> </span></p>
-<p class="p1">vendor, same amount, within 5 business days. Create a report with:<span class="Apple-converted-space"> </span></p>
-<p class="p1">Vendor, Amount, Payment Date 1, Payment Date 2, Notes column."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;PBC list population&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"For each request in column A of 'Audit_PBC_List.xlsx', check whether<span class="Apple-converted-space"> </span></p>
-<p class="p1">a matching file exists in Reconciliation and Reports_Draft. Update<span class="Apple-converted-space"> </span></p>
-<p class="p1">column B with 'File Found' or 'Missing', column C with filename."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'How should I use Claude Cowork to prepare for our annual external audit? I need a PBC tracking list, organized support schedules, and a duplicate payment check. What should I verify before giving anything to auditors?'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── SALES ─────────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'sales',id:'s-overview',num:'S1',group:'Sales Module',title:'Sales overview',subtitle:'How Cowork accelerates sales workflows at RealPage.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#FAEEDA;border:0.5px solid #FAC775"&gt;&lt;span style="font-size:20px"&gt;🤝&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#633806"&gt;Sales / Account Management Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#854F0B;font-size:12px"&gt;Complete the Core sections first, then work through these sales-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Sales teams spend enormous time on prep, follow-up, and reporting — work that follows predictable patterns. Cowork handles the repetitive parts so you can focus on relationships and closing.&lt;/p&gt;</p>
-<p class="p1">&lt;h2&gt;High-value Sales workflows in this module&lt;/h2&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Account research briefings&lt;/td&gt;&lt;td&gt;1-pager in minutes before any call&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;CRM data cleanup and enrichment&lt;/td&gt;&lt;td&gt;Standardize messy pipeline data&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Proposal and follow-up drafts&lt;/td&gt;&lt;td&gt;Consistent, personalized outreach at scale&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Pipeline reporting&lt;/td&gt;&lt;td&gt;Weekly summaries from CRM exports&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Meeting prep from Teams/email threads&lt;/td&gt;&lt;td&gt;Context summary before every customer call&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in Sales at RealPage. What are the top 5 ways Claude Cowork can save me time on pre-call prep, follow-up, and pipeline reporting?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'sales',id:'s-research',num:'S2',group:'Sales Module',title:'Account research &amp; meeting prep',subtitle:'One-pagers and call briefs in minutes.',</p>
-<p class="p1">content:`&lt;h2&gt;Account research brief&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Research [Company Name]. Create a 1-page Word brief covering:<span class="Apple-converted-space"> </span></p>
-<p class="p1">company overview, key products/services, recent news, likely pain<span class="Apple-converted-space"> </span></p>
-<p class="p1">points relevant to real estate software, and key contacts.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as '[CompanyName]_Brief.docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Pre-call prep from email + Teams history (M365 connector required)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"I have a meeting with [Name] at [Company] at 2pm. Search my Outlook<span class="Apple-converted-space"> </span></p>
-<p class="p1">for emails from them in the last 60 days. Check the [Teams channel]<span class="Apple-converted-space"> </span></p>
-<p class="p1">for any recent mentions. Summarize: open issues, last commitments made,<span class="Apple-converted-space"> </span></p>
-<p class="p1">what I should be prepared to address. Save as a Word doc."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Competitor comparison&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Create a competitive comparison between RealPage and [Competitor]<span class="Apple-converted-space"> </span></p>
-<p class="p1">covering: key features, pricing model, typical customer profile,<span class="Apple-converted-space"> </span></p>
-<p class="p1">known weaknesses. Format as a one-page Word doc I can reference on calls."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a pre-call research workflow in Claude Cowork. I have a meeting with a prospect in 30 minutes. What\'s the fastest way to pull together a useful brief from Outlook, Teams, and web research?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'sales',id:'s-outreach',num:'S3',group:'Sales Module',title:'Proposals &amp; follow-up',subtitle:'Consistent, personalized outreach at scale.',</p>
-<p class="p1">content:`&lt;h2&gt;Follow-up email after a call (M365 connector required)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read my last email thread with [Contact] in Outlook. Draft a<span class="Apple-converted-space"> </span></p>
-<p class="p1">follow-up email that: thanks them for the call, recaps the 3 key<span class="Apple-converted-space"> </span></p>
-<p class="p1">points discussed, lists the next steps we agreed on, and includes<span class="Apple-converted-space"> </span></p>
-<p class="p1">a soft CTA. Professional tone, under 200 words. Save to Drafts."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Proposal first draft&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Using the notes in 'Discovery_[CompanyName].docx', draft a proposal<span class="Apple-converted-space"> </span></p>
-<p class="p1">Word document for [Company]. Include: executive summary of their<span class="Apple-converted-space"> </span></p>
-<p class="p1">problem, our recommended solution, key benefits, and proposed next<span class="Apple-converted-space"> </span></p>
-<p class="p1">steps. Use our standard proposal template if one exists in the folder."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Batch follow-up drafts from pipeline export&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Pipeline_Export.xlsx'. For each deal in 'Proposal Sent' stage<span class="Apple-converted-space"> </span></p>
-<p class="p1">with no activity in 14+ days, draft a brief check-in email.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Personalize the opening line using the company name and deal notes.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save each to Outlook Drafts — do not send."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me set up a follow-up workflow in Claude Cowork. After sales calls, I want to automatically draft a follow-up email based on my Outlook thread history. Walk me through the prompt and what to review before sending.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'sales',id:'s-pipeline',num:'S4',group:'Sales Module',title:'Pipeline reporting',subtitle:'Weekly summaries and CRM cleanup from exports.',</p>
-<p class="p1">content:`&lt;h2&gt;Weekly pipeline summary&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Pipeline_Export.xlsx'. Create a Word summary doc with:<span class="Apple-converted-space"> </span></p>
-<p class="p1">total pipeline value by stage, deals closing this month, top 5<span class="Apple-converted-space"> </span></p>
-<p class="p1">opportunities by value, and any deals that have gone cold (no<span class="Apple-converted-space"> </span></p>
-<p class="p1">activity in 21+ days). Professional format suitable for my manager."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;CRM data cleanup&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'CRM_Export.xlsx'. Identify: missing company names,<span class="Apple-converted-space"> </span></p>
-<p class="p1">inconsistent stage labels, duplicate contacts (same email), and<span class="Apple-converted-space"> </span></p>
-<p class="p1">deals with no close date. Create a cleanup report highlighting<span class="Apple-converted-space"> </span></p>
-<p class="p1">each issue with the row number. Save as 'CRM_Cleanup_Review.xlsx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Scheduled weekly pipeline report&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Every Friday at 4:30 PM, read the latest pipeline export in my<span class="Apple-converted-space"> </span></p>
-<p class="p1">Inbox folder and generate a weekly pipeline summary Word doc.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save to Drafts folder."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Build me a weekly pipeline reporting workflow in Claude Cowork. I export my CRM to Excel every Friday. What prompts give me the most useful summary, and how do I schedule it to run automatically?'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── PRODUCT &amp; ENG ─────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'eng',id:'e-overview',num:'E1',group:'Product &amp; Eng Module',title:'Product &amp; Eng overview',subtitle:'How Cowork fits into product and engineering workflows.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#EEEDFE;border:0.5px solid #CECBF6"&gt;&lt;span style="font-size:20px"&gt;⚙️&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#3C3489"&gt;Product &amp; Engineering Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#534AB7;font-size:12px"&gt;Complete the Core sections first, then work through these role-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;For product managers and engineers, Cowork complements Claude Code — handling documentation, sprint reporting, meeting synthesis, and spec drafting while Code handles the actual development work.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;PRD and spec drafting&lt;/td&gt;&lt;td&gt;First draft from notes in minutes&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Sprint retrospective synthesis&lt;/td&gt;&lt;td&gt;Action items extracted from meeting notes&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Release notes generation&lt;/td&gt;&lt;td&gt;From commit messages or ticket exports&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Bug triage report from Jira export&lt;/td&gt;&lt;td&gt;Prioritized summary for standup or review&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Technical doc summarization&lt;/td&gt;&lt;td&gt;Dense docs → readable summaries&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in Product at RealPage. What are the top 5 ways Claude Cowork can save me time on documentation, sprint reporting, and stakeholder communication — without replacing Claude Code for actual development work?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'eng',id:'e-docs',num:'E2',group:'Product &amp; Eng Module',title:'Documentation &amp; specs',subtitle:'PRDs, specs, and release notes from raw inputs.',</p>
-<p class="p1">content:`&lt;h2&gt;PRD first draft from notes&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the discovery notes in 'Feature_Notes_[Name].docx'. Draft a<span class="Apple-converted-space"> </span></p>
-<p class="p1">Product Requirements Document with: problem statement, target user,<span class="Apple-converted-space"> </span></p>
-<p class="p1">success metrics, functional requirements, out of scope, and open<span class="Apple-converted-space"> </span></p>
-<p class="p1">questions. Save as 'PRD_[Feature].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Release notes from ticket export&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Sprint_Tickets_Closed.xlsx'. Generate release notes organized<span class="Apple-converted-space"> </span></p>
-<p class="p1">by category (New Features, Improvements, Bug Fixes). Write each item<span class="Apple-converted-space"> </span></p>
-<p class="p1">in customer-friendly language — no internal ticket IDs or jargon.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as 'Release_Notes_v[X.X].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Technical doc summarization&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the API documentation in this folder. Create a 2-page summary<span class="Apple-converted-space"> </span></p>
-<p class="p1">covering: key endpoints, authentication method, rate limits, and<span class="Apple-converted-space"> </span></p>
-<p class="p1">common error codes. Format as a Word doc for non-technical stakeholders."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me draft a Product Requirements Document using Claude Cowork. I have rough discovery notes and user interview summaries in a folder. What\'s the best prompt structure to get a solid first draft?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'eng',id:'e-sprints',num:'E3',group:'Product &amp; Eng Module',title:'Sprint &amp; meeting synthesis',subtitle:'Action items, retros, and standup summaries.',</p>
-<p class="p1">content:`&lt;h2&gt;Sprint retrospective synthesis&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the retro notes in 'Retro_Sprint[N].docx'. Organize the<span class="Apple-converted-space"> </span></p>
-<p class="p1">output into: What went well (bullet list), What didn't go well<span class="Apple-converted-space"> </span></p>
-<p class="p1">(bullet list), Action items with owner and due date. Save as<span class="Apple-converted-space"> </span></p>
-<p class="p1">a clean Word doc for the team."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Weekly standup summary from Teams (M365 connector required)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the last 5 days of messages in the [Team] Teams channel.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Summarize: key decisions made, blockers raised, items that need<span class="Apple-converted-space"> </span></p>
-<p class="p1">follow-up, and anything the PM needs to act on. Keep it under<span class="Apple-converted-space"> </span></p>
-<p class="p1">one page."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Bug triage from Jira export&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Jira_Open_Bugs.xlsx'. Prioritize bugs by severity and<span class="Apple-converted-space"> </span></p>
-<p class="p1">customer impact. Create a triage summary with: Critical (fix now),<span class="Apple-converted-space"> </span></p>
-<p class="p1">High (fix this sprint), Medium (backlog), and a top-5 list for<span class="Apple-converted-space"> </span></p>
-<p class="p1">the next standup. Save as 'Bug_Triage_[Date].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I run sprint retrospectives at RealPage and the notes are always a mess. Help me build a Cowork workflow that turns raw retro notes into a clean action-item doc with owners and due dates.'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── HR ────────────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'hr',id:'h-overview',num:'H1',group:'HR Module',title:'HR / People Ops overview',subtitle:'How Cowork supports HR and People Operations at RealPage.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#FAECE7;border:0.5px solid #F5C4B3"&gt;&lt;span style="font-size:20px"&gt;👥&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#4A1B0C"&gt;HR / People Operations Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#712B13;font-size:12px"&gt;Complete the Core sections first, then work through these HR-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;HR workflows involve a lot of structured, repetitive document work — job descriptions, offer letters, policy summaries, onboarding materials, and reporting. Cowork handles all of it.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Job description drafting&lt;/td&gt;&lt;td&gt;First draft in minutes from a role brief&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Onboarding document prep&lt;/td&gt;&lt;td&gt;Personalized packs from templates&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Policy summarization&lt;/td&gt;&lt;td&gt;Dense policy docs → plain-language summaries&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Headcount and attrition reporting&lt;/td&gt;&lt;td&gt;From HRIS exports to formatted summaries&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Interview question generation&lt;/td&gt;&lt;td&gt;Role-specific question banks&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in HR at RealPage. What are the top 5 ways Claude Cowork can save me time on document creation, reporting, and onboarding prep?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'hr',id:'h-jd',num:'H2',group:'HR Module',title:'Job descriptions &amp; recruiting',subtitle:'Draft JDs, interview questions, and candidate summaries.',</p>
-<p class="p1">content:`&lt;h2&gt;Job description from a role brief&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the role brief in 'Role_Brief_[Title].docx'. Draft a job<span class="Apple-converted-space"> </span></p>
-<p class="p1">description with: role summary, key responsibilities (bullet list),<span class="Apple-converted-space"> </span></p>
-<p class="p1">required qualifications, preferred qualifications, and a brief<span class="Apple-converted-space"> </span></p>
-<p class="p1">'Why RealPage' closing section. Professional tone. Save as<span class="Apple-converted-space"> </span></p>
-<p class="p1">'JD_[Title].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Interview question bank&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Based on the job description in 'JD_[Title].docx', generate an<span class="Apple-converted-space"> </span></p>
-<p class="p1">interview question bank with 5 questions per category: Technical<span class="Apple-converted-space"> </span></p>
-<p class="p1">skills, Problem-solving, Collaboration, Culture fit, and Role-specific<span class="Apple-converted-space"> </span></p>
-<p class="p1">scenarios. Format as a Word doc for interviewers."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Candidate summary from interview notes&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read interview notes for [Candidate Name] across all interviewer<span class="Apple-converted-space"> </span></p>
-<p class="p1">files in this folder. Create a structured summary: strengths,<span class="Apple-converted-space"> </span></p>
-<p class="p1">concerns, hiring recommendation, and suggested next steps.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as '[CandidateName]_Summary.docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a job description drafting workflow in Claude Cowork. I have a rough role brief from a hiring manager. What\'s the best way to turn that into a polished JD and a matching interview question bank?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'hr',id:'h-onboard',num:'H3',group:'HR Module',title:'Onboarding &amp; policy docs',subtitle:'Onboarding packs, policy summaries, and handbooks.',</p>
-<p class="p1">content:`&lt;h2&gt;Onboarding pack from template&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Using the onboarding template in 'Onboarding_Template.docx' and the<span class="Apple-converted-space"> </span></p>
-<p class="p1">new hire info in 'NewHire_[Name].xlsx', create a personalized<span class="Apple-converted-space"> </span></p>
-<p class="p1">onboarding pack for [Name] joining [Team] on [Date]. Include:<span class="Apple-converted-space"> </span></p>
-<p class="p1">welcome message, first-week schedule, key contacts, and links to<span class="Apple-converted-space"> </span></p>
-<p class="p1">required training. Save as 'Onboarding_[Name].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Policy plain-language summary&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Policy_[Name].pdf'. Write a plain-language summary — 2 pages<span class="Apple-converted-space"> </span></p>
-<p class="p1">max — covering: what the policy requires, what employees must do,<span class="Apple-converted-space"> </span></p>
-<p class="p1">key deadlines or thresholds, and who to contact with questions.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Avoid legal jargon. Save as 'Policy_Summary_[Name].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Headcount report from HRIS export&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'HRIS_Export_[Month].xlsx'. Create a headcount summary showing:<span class="Apple-converted-space"> </span></p>
-<p class="p1">total headcount by department, new hires this month, terminations<span class="Apple-converted-space"> </span></p>
-<p class="p1">this month, and open roles. Save as 'Headcount_Summary_[Month].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I need to create onboarding packs for 3 new hires starting next week, each joining different teams. Help me build a Cowork workflow to generate personalized docs from a shared template efficiently.'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── MARKETING ─────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'mkt',id:'m-overview',num:'M1',group:'Marketing Module',title:'Marketing overview',subtitle:'How Cowork accelerates content and campaign work.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#FBEAF0;border:0.5px solid #F4C0D1"&gt;&lt;span style="font-size:20px"&gt;📣&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#4B1528"&gt;Marketing Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#72243E;font-size:12px"&gt;Complete the Core sections first, then work through these marketing-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Marketing involves high-volume content creation, repurposing, and reporting. Cowork handles batch content tasks, campaign briefs, competitive research, and performance summaries.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Content repurposing&lt;/td&gt;&lt;td&gt;One long-form piece → multiple formats&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Campaign brief drafting&lt;/td&gt;&lt;td&gt;Structured briefs from raw strategy notes&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Competitive intelligence reports&lt;/td&gt;&lt;td&gt;Structured analysis from research&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Performance report summaries&lt;/td&gt;&lt;td&gt;Dashboard exports → executive summaries&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Email and copy drafts&lt;/td&gt;&lt;td&gt;On-brand drafts at scale&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in Marketing at RealPage. What are the top 5 ways Claude Cowork can save me time on content creation, campaign reporting, and competitive research?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'mkt',id:'m-content',num:'M2',group:'Marketing Module',title:'Content creation &amp; repurposing',subtitle:'From long-form to multi-channel in one workflow.',</p>
-<p class="p1">content:`&lt;h2&gt;Repurpose a blog post or article&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the blog post in 'Post_[Title].docx'. Create the following<span class="Apple-converted-space"> </span></p>
-<p class="p1">from it: (1) a 5-tweet thread, (2) a 150-word LinkedIn post,<span class="Apple-converted-space"> </span></p>
-<p class="p1">(3) a 60-second video script, (4) a 3-bullet email newsletter snippet.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Preserve the core message and maintain our brand tone. Save each<span class="Apple-converted-space"> </span></p>
-<p class="p1">as a separate file."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Campaign brief from strategy notes&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Campaign_Notes_[Name].docx'. Draft a structured campaign<span class="Apple-converted-space"> </span></p>
-<p class="p1">brief with: objective, target audience, key message, channels,<span class="Apple-converted-space"> </span></p>
-<p class="p1">content needs, success metrics, and timeline. Save as<span class="Apple-converted-space"> </span></p>
-<p class="p1">'Campaign_Brief_[Name].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Batch email subject line variations&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Email_Draft_[Campaign].docx'. Generate 10 subject line<span class="Apple-converted-space"> </span></p>
-<p class="p1">variations: 3 curiosity-driven, 3 benefit-led, 2 question-based,<span class="Apple-converted-space"> </span></p>
-<p class="p1">2 urgency-based. Keep each under 50 characters. Save as a list<span class="Apple-converted-space"> </span></p>
-<p class="p1">in a Word doc."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I have a 1500-word thought leadership article that needs to be repurposed for LinkedIn, Twitter, email newsletter, and a short video script. Help me build a Cowork workflow to do all four at once.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'mkt',id:'m-reporting',num:'M3',group:'Marketing Module',title:'Reporting &amp; competitive intel',subtitle:'Performance summaries and competitor analysis.',</p>
-<p class="p1">content:`&lt;h2&gt;Campaign performance summary&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Campaign_Performance_[Month].xlsx'. Create a Word summary<span class="Apple-converted-space"> </span></p>
-<p class="p1">covering: total impressions, clicks, conversions, cost per lead,<span class="Apple-converted-space"> </span></p>
-<p class="p1">top-performing content, and 3 key takeaways for next month.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Suitable for sharing with leadership. Save as<span class="Apple-converted-space"> </span></p>
-<p class="p1">'Performance_Summary_[Month].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Competitive intelligence brief&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Research [Competitor]. Create a competitive intelligence brief<span class="Apple-converted-space"> </span></p>
-<p class="p1">covering: product overview, key features, pricing model, target<span class="Apple-converted-space"> </span></p>
-<p class="p1">customer, recent news or launches, and known weaknesses.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Format as a 1-page Word doc. Save as '[Competitor]_Intel.docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Scheduled weekly content digest from Teams (M365 connector)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Every Monday at 9 AM, read the last 7 days of the Marketing Teams<span class="Apple-converted-space"> </span></p>
-<p class="p1">channel. Summarize: campaigns launched, content published, performance<span class="Apple-converted-space"> </span></p>
-<p class="p1">highlights, and open action items. Save as 'Weekly_Marketing_Digest_[Date].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a monthly campaign performance reporting workflow in Claude Cowork. I export data from our marketing platform to Excel. What prompts create the most useful executive summary, and how do I make it repeatable each month?'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── LEGAL ─────────────────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'legal',id:'l-overview',num:'L1',group:'Legal Module',title:'Legal overview',subtitle:'How Cowork supports Legal and Compliance at RealPage.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#E6F1FB;border:0.5px solid #B5D4F4"&gt;&lt;span style="font-size:20px"&gt;⚖️&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#0C447C"&gt;Legal / Compliance Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#185FA5;font-size:12px"&gt;Complete the Core sections first, then work through these legal-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="warn-box"&gt;Claude Cowork is an AI assistant and does not provide legal advice. All Cowork outputs in Legal workflows must be reviewed and approved by a qualified attorney before reliance or use.&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Legal and compliance teams deal with high volumes of structured documents that follow consistent patterns. Cowork is well-suited to the administrative and organizational side of legal work.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Contract review prep&lt;/td&gt;&lt;td&gt;Clause extraction and issue flagging for attorney review&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Policy document summarization&lt;/td&gt;&lt;td&gt;Dense legal text → plain-language summaries&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Compliance tracking&lt;/td&gt;&lt;td&gt;Obligation lists from contracts&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Document organization&lt;/td&gt;&lt;td&gt;Sort and index large contract repositories&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;NDA and template comparison&lt;/td&gt;&lt;td&gt;Flag deviations from standard language&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in Legal at RealPage. What are the appropriate ways to use Claude Cowork for legal document workflows — and what are the limits I should be clear about with my team?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'legal',id:'l-contracts',num:'L2',group:'Legal Module',title:'Contract review prep',subtitle:'Clause extraction, obligation tracking, and deviation flagging.',</p>
-<p class="p1">content:`&lt;div class="warn-box"&gt;These outputs are for attorney review and preparation only — not for legal reliance. Always have a qualified attorney review before taking action.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Extract key clauses from a contract&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Contract_[Name].pdf'. Extract and list the following clauses<span class="Apple-converted-space"> </span></p>
-<p class="p1">with the exact section reference: Term and termination, Payment terms,<span class="Apple-converted-space"> </span></p>
-<p class="p1">Limitation of liability, Indemnification, Governing law, Confidentiality,<span class="Apple-converted-space"> </span></p>
-<p class="p1">and any unusual or non-standard provisions. Save as<span class="Apple-converted-space"> </span></p>
-<p class="p1">'ClauseExtract_[Name].docx' for attorney review."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Obligation tracker from contract portfolio&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read all contracts in the Contracts folder. For each, extract:<span class="Apple-converted-space"> </span></p>
-<p class="p1">party names, effective date, expiration date, renewal notice period,<span class="Apple-converted-space"> </span></p>
-<p class="p1">and key obligations. Create an Excel tracker called<span class="Apple-converted-space"> </span></p>
-<p class="p1">'Contract_Obligations.xlsx' with one row per contract."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;NDA deviation check against standard template&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Compare 'NDA_Counterparty.pdf' against our standard NDA template<span class="Apple-converted-space"> </span></p>
-<p class="p1">in 'NDA_Standard.docx'. List every clause that differs from our<span class="Apple-converted-space"> </span></p>
-<p class="p1">standard, with the counterparty's version and our standard version<span class="Apple-converted-space"> </span></p>
-<p class="p1">side by side. Flag clauses that represent increased risk.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as 'NDA_Deviation_Report.docx' for attorney review."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a contract review prep workflow in Claude Cowork. I need to extract key clauses and flag deviations from our standard NDA template across a batch of incoming contracts. Walk me through the prompt sequence.'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'legal',id:'l-compliance',num:'L3',group:'Legal Module',title:'Compliance &amp; policy',subtitle:'Policy summaries, compliance calendars, and audit prep.',</p>
-<p class="p1">content:`&lt;div class="warn-box"&gt;All compliance outputs must be reviewed by qualified legal or compliance staff before use.&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Regulatory policy plain-language summary&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Regulation_[Name].pdf'. Write a plain-language summary —<span class="Apple-converted-space"> </span></p>
-<p class="p1">2 pages max — covering: who is affected, what is required, key<span class="Apple-converted-space"> </span></p>
-<p class="p1">deadlines, penalties for non-compliance, and recommended actions.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Avoid legal jargon. Save as 'RegSummary_[Name].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Compliance calendar from obligation tracker&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Contract_Obligations.xlsx'. Identify all upcoming notice<span class="Apple-converted-space"> </span></p>
-<p class="p1">deadlines, renewal dates, and reporting obligations in the next<span class="Apple-converted-space"> </span></p>
-<p class="p1">90 days. Create a compliance calendar in Excel sorted by date,<span class="Apple-converted-space"> </span></p>
-<p class="p1">with contract name, obligation type, and responsible party."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Organize and index a document repository&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read all files in the Legal_Repository folder. Create an index<span class="Apple-converted-space"> </span></p>
-<p class="p1">in Excel listing: filename, document type (NDA / MSA / SOW / Policy /<span class="Apple-converted-space"> </span></p>
-<p class="p1">Other), parties involved, effective date if present, and file path.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as 'Legal_Repository_Index.xlsx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a compliance calendar workflow in Claude Cowork. I have a contract obligation tracker in Excel with expiration dates and notice periods. How do I get a 90-day rolling calendar of upcoming deadlines?'},</p>
-<p class="p2"><br></p>
-<p class="p1">// ── CUSTOMER SUCCESS ──────────────────────────────────────────────────────</p>
-<p class="p1">{dept:'cs',id:'x-overview',num:'CS1',group:'Customer Success Module',title:'Customer Success overview',subtitle:'How Cowork supports CS and Support teams at RealPage.',</p>
-<p class="p1">content:`&lt;div class="dept-banner" style="background:#E1F5EE;border:0.5px solid #9FE1CB"&gt;&lt;span style="font-size:20px"&gt;🎯&lt;/span&gt;&lt;div&gt;&lt;strong style="color:#085041"&gt;Customer Success / Support Module&lt;/strong&gt;&lt;br&gt;&lt;span style="color:#0F6E56;font-size:12px"&gt;Complete the Core sections first, then work through these CS-specific workflows.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;p&gt;Customer Success teams balance high-volume communication with the need for personalized, context-aware responses. Cowork handles the prep and documentation so you can focus on the customer relationship.&lt;/p&gt;</p>
-<p class="p1">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Workflow&lt;/th&gt;&lt;th&gt;Benefit&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;QBR and EBR preparation&lt;/td&gt;&lt;td&gt;Data-driven presentation decks in minutes&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Customer health summaries&lt;/td&gt;&lt;td&gt;Account status reports from CRM + usage data&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Escalation documentation&lt;/td&gt;&lt;td&gt;Structured issue summaries for handoffs&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Renewal prep briefs&lt;/td&gt;&lt;td&gt;Account history + risk summary before renewal calls&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1">&lt;tr&gt;&lt;td&gt;Support ticket trend analysis&lt;/td&gt;&lt;td&gt;Patterns from ticket exports → product feedback&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;`,</p>
-<p class="p1">prompt:'I work in Customer Success at RealPage. What are the top 5 ways Claude Cowork can save me time on account prep, QBRs, and renewal documentation?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'cs',id:'x-qbr',num:'CS2',group:'Customer Success Module',title:'QBR &amp; renewal prep',subtitle:'Account briefs, health summaries, and presentation decks.',</p>
-<p class="p1">content:`&lt;h2&gt;QBR presentation deck&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Using the account data in 'Account_[Name]_Data.xlsx' and usage<span class="Apple-converted-space"> </span></p>
-<p class="p1">metrics in 'Usage_[Name]_Q[N].xlsx', create a QBR PowerPoint<span class="Apple-converted-space"> </span></p>
-<p class="p1">presentation with: executive summary, product adoption metrics,<span class="Apple-converted-space"> </span></p>
-<p class="p1">key wins this quarter, open issues and resolution status, and<span class="Apple-converted-space"> </span></p>
-<p class="p1">recommended next steps. Use our QBR template if present in the folder."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Renewal prep brief from account history (M365 connector)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"I have a renewal call with [Customer] next week. Search Outlook<span class="Apple-converted-space"> </span></p>
-<p class="p1">for emails from their domain in the last 90 days. Check the<span class="Apple-converted-space"> </span></p>
-<p class="p1">[CS Teams channel] for recent mentions. Summarize: relationship<span class="Apple-converted-space"> </span></p>
-<p class="p1">health, open issues, usage trends, expansion opportunities,<span class="Apple-converted-space"> </span></p>
-<p class="p1">and renewal risk factors. Save as '[Customer]_Renewal_Brief.docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Customer health summary report&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Customer_Health_Export.xlsx'. Create a summary showing:<span class="Apple-converted-space"> </span></p>
-<p class="p1">customers by health score tier (Green/Yellow/Red), top 5 at-risk<span class="Apple-converted-space"> </span></p>
-<p class="p1">accounts with reason, and top 5 expansion opportunities.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as 'Health_Summary_[Month].docx' for my manager."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'Help me build a QBR preparation workflow in Claude Cowork. I have account data, usage metrics, and support history in separate Excel files. What\'s the most efficient way to turn those into a polished deck?'},</p>
-<p class="p2"><br></p>
-<p class="p1">{dept:'cs',id:'x-support',num:'CS3',group:'Customer Success Module',title:'Escalations &amp; ticket analysis',subtitle:'Escalation docs, handoff summaries, and support trend reports.',</p>
-<p class="p1">content:`&lt;h2&gt;Escalation documentation&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read the email thread with [Customer] in 'Escalation_[Name].docx'<span class="Apple-converted-space"> </span></p>
-<p class="p1">and any related support tickets in 'Tickets_[Name].xlsx'. Create<span class="Apple-converted-space"> </span></p>
-<p class="p1">a structured escalation summary with: issue description, timeline<span class="Apple-converted-space"> </span></p>
-<p class="p1">of events, customer impact, actions taken so far, and recommended<span class="Apple-converted-space"> </span></p>
-<p class="p1">next steps. Save as 'Escalation_Summary_[Name].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Support ticket trend analysis&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Read 'Support_Tickets_[Month].xlsx'. Identify: top 5 issue<span class="Apple-converted-space"> </span></p>
-<p class="p1">categories by volume, average resolution time by category,<span class="Apple-converted-space"> </span></p>
-<p class="p1">tickets open more than 7 days, and any customers with 3+ open<span class="Apple-converted-space"> </span></p>
-<p class="p1">tickets. Save a trend report as 'Support_Trends_[Month].docx'<span class="Apple-converted-space"> </span></p>
-<p class="p1">suitable for sharing with the Product team."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;h2&gt;Weekly CS digest from Teams (M365 connector)&lt;/h2&gt;</p>
-<p class="p1">&lt;div class="prompt-block"&gt;&lt;code&gt;"Every Monday at 8:30 AM, read the last 7 days of the<span class="Apple-converted-space"> </span></p>
-<p class="p1">Customer-Success Teams channel. Summarize: escalations raised,<span class="Apple-converted-space"> </span></p>
-<p class="p1">renewals discussed, key account updates, and action items.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Save as 'CS_Weekly_Digest_[Date].docx'."&lt;/code&gt;&lt;button class="copy-btn" onclick="copyCode(this)"&gt;Copy&lt;/button&gt;&lt;/div&gt;`,</p>
-<p class="p1">prompt:'I manage a book of 40 accounts and I\'m losing track of escalations and open issues. Help me build a Cowork workflow to create a structured escalation log and a weekly account health digest from my Teams channel and email history.'},</p>
-<p class="p1">];</p>
-<p class="p2"><br></p>
-<p class="p1">const DEPT_LABELS = {core:'Core',fin:'Finance',sales:'Sales',eng:'Product &amp; Eng',hr:'HR / People',mkt:'Marketing',legal:'Legal',cs:'Customer Success'};</p>
-<p class="p1">let currentDept = 'core';</p>
-<p class="p1">let visited = new Set(JSON.parse(localStorage.getItem('rp2_visited')||'[]'));</p>
-<p class="p2"><br></p>
-<p class="p1">function deptSections(d){ return ALL_SECTIONS.filter(s=&gt;s.id.startsWith(d==='core'?'c-':d==='fin'?'f-':d==='sales'?'s-':d==='eng'?'e-':d==='hr'?'h-':d==='mkt'?'m-':d==='legal'?'l-':'x-')) }</p>
-<p class="p2"><br></p>
-<p class="p1">function buildDeptBar(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const bar=document.getElementById('dept-bar');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>bar.innerHTML='';</p>
-<p class="p1"><span class="Apple-converted-space">  </span>DEPTS.forEach(d=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const btn=document.createElement('button');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.className='dept-btn '+(d.cls||'')+(d.id===currentDept?' active':'');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.textContent=d.label;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.onclick=()=&gt;switchDept(d.id);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>bar.appendChild(btn);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>});</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function buildNav(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const nav=document.getElementById('nav');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>nav.innerHTML='';</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const secs=deptSections(currentDept);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>let lastGroup='';</p>
-<p class="p1"><span class="Apple-converted-space">  </span>secs.forEach(s=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(s.group!==lastGroup){</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if(lastGroup) nav.insertAdjacentHTML('beforeend','&lt;div class="nav-divider"&gt;&lt;/div&gt;');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>nav.insertAdjacentHTML('beforeend',`&lt;div class="nav-group"&gt;${s.group}&lt;/div&gt;`);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lastGroup=s.group;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const v=visited.has(s.id)?'visited':'';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav.insertAdjacentHTML('beforeend',`</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="nav-item ${v}" id="nav-${s.id}" onclick="showSection('${s.id}')"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="nav-num"&gt;${s.num}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span style="flex:1;text-align:left;line-height:1.3"&gt;${s.title}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="check"&gt;&lt;svg width="13" height="13" viewBox="0 0 13 13"&gt;&lt;circle cx="6.5" cy="6.5" r="6.5" fill="#378ADD" opacity=".15"/&gt;&lt;path d="M3.5 6.5l2 2 4-4" stroke="#185FA5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/&gt;&lt;/svg&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;`);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>});</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function updateProgress(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const all=ALL_SECTIONS.length;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const v=visited.size;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const pct=Math.round(v/all*100);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('pbar').style.width=pct+'%';</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('plabel').textContent=`${v} of ${all} sections visited`;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function switchDept(deptId){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>currentDept=deptId;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>buildDeptBar();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>buildNav();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const first=deptSections(deptId)[0];</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if(first) showSection(first.id);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function showSection(id){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const s=ALL_SECTIONS.find(x=&gt;x.id===id);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if(!s) return;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.nav-item').forEach(el=&gt;el.classList.remove('active'));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const navEl=document.getElementById('nav-'+id);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if(navEl){navEl.classList.add('active');navEl.classList.add('visited');}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>visited.add(id);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>localStorage.setItem('rp2_visited',JSON.stringify([...visited]));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>updateProgress();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const d=DEPTS.find(x=&gt;x.id===s.dept)||DEPTS[0];</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const prompt=encodeURIComponent(s.prompt);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('section-content').innerHTML=`</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-badge ${d.badgeCls}"&gt;${s.num} — ${DEPT_LABELS[s.dept]||s.dept}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;${s.title}&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;${s.subtitle}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-body"&gt;${s.content}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="go-deeper"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="go-deeper-text"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Practice with Claude&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Open a live conversation about this topic with a pre-written prompt&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a class="go-deeper-btn" href="https://claude.ai/new?q=${prompt}" target="_blank" rel="noopener"&gt;Go deeper →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('main').scrollTop=0;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function copyCode(btn){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const code=btn.previousElementSibling.textContent;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>navigator.clipboard.writeText(code).then(()=&gt;{</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const orig=btn.textContent;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.textContent='Copied!';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.style.color='#9FE1CB';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setTimeout(()=&gt;{btn.textContent=orig;btn.style.color='';},2000);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>});</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function resetProgress(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>visited=new Set();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>localStorage.setItem('rp2_visited','[]');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>updateProgress();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.nav-item').forEach(el=&gt;el.classList.remove('visited'));</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">buildDeptBar();</p>
-<p class="p1">buildNav();</p>
-<p class="p1">updateProgress();</p>
-<p class="p1">showSection('c-welcome');</p>
-<p class="p1">&lt;/script&gt;</p>
-</body>
-</html>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;line-height:1.7;color:var(--color-text-primary);background:var(--color-background-tertiary,#f5f5f3)}
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:272px;min-width:272px;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-header{padding:14px 16px 12px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.sidebar-logo{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.sidebar-title{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.35}
+.progress-bar-wrap{margin-top:9px;height:3px;background:var(--color-border-tertiary);border-radius:4px;overflow:hidden}
+.progress-bar-fill{height:100%;background:#378ADD;border-radius:4px;transition:width .4s}
+.progress-label{font-size:10px;color:var(--color-text-tertiary);margin-top:4px}
+
+/* Dept switcher */
+.dept-bar{padding:10px 12px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;gap:4px;flex-wrap:wrap}
+.dept-btn{font-size:11px;padding:4px 9px;border-radius:20px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;font-weight:400;transition:all .15s;white-space:nowrap}
+.dept-btn:hover{background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.dept-btn.active{background:#185FA5;color:#fff;border-color:#185FA5;font-weight:500}
+.dept-btn.dept-fin{background:#EAF3DE;color:#27500A;border-color:#C0DD97}
+.dept-btn.dept-fin.active{background:#27500A;color:#fff;border-color:#27500A}
+.dept-btn.dept-sales{background:#FAEEDA;color:#633806;border-color:#FAC775}
+.dept-btn.dept-sales.active{background:#633806;color:#fff;border-color:#633806}
+.dept-btn.dept-eng{background:#EEEDFE;color:#3C3489;border-color:#CECBF6}
+.dept-btn.dept-eng.active{background:#3C3489;color:#fff;border-color:#3C3489}
+.dept-btn.dept-hr{background:#FAECE7;color:#4A1B0C;border-color:#F5C4B3}
+.dept-btn.dept-hr.active{background:#4A1B0C;color:#fff;border-color:#4A1B0C}
+.dept-btn.dept-mkt{background:#FBEAF0;color:#4B1528;border-color:#F4C0D1}
+.dept-btn.dept-mkt.active{background:#4B1528;color:#fff;border-color:#4B1528}
+.dept-btn.dept-legal{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4}
+.dept-btn.dept-legal.active{background:#0C447C;color:#fff;border-color:#0C447C}
+.dept-btn.dept-cs{background:#E1F5EE;color:#085041;border-color:#9FE1CB}
+.dept-btn.dept-cs.active{background:#085041;color:#fff;border-color:#085041}
+
+.sidebar-nav{flex:1;overflow-y:auto;padding:6px 0}
+.nav-group{padding:8px 14px 2px;font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:12.5px;color:var(--color-text-secondary);border:none;background:none;width:100%;text-align:left;transition:background .12s}
+.nav-item:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.nav-item.active{background:var(--color-background-info,#E6F1FB);color:#185FA5;font-weight:500}
+.nav-item.active .nav-num{color:#378ADD}
+.nav-item.visited .check{opacity:1}
+.nav-num{font-size:10px;color:var(--color-text-tertiary);min-width:18px;font-variant-numeric:tabular-nums}
+.check{width:13px;height:13px;margin-left:auto;opacity:0;flex-shrink:0}
+.nav-divider{height:0.5px;background:var(--color-border-tertiary);margin:5px 0}
+.sidebar-footer{padding:10px 14px;border-top:0.5px solid var(--color-border-tertiary)}
+.reset-btn{font-size:11px;color:var(--color-text-tertiary);background:none;border:none;cursor:pointer;padding:0}
+.reset-btn:hover{color:var(--color-text-secondary)}
+
+/* Content */
+.content{flex:1;overflow-y:auto;padding:36px 44px 72px}
+.content-inner{max-width:740px}
+.section-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:10px;letter-spacing:.03em}
+.badge-core{background:#E6F1FB;color:#185FA5}
+.badge-fin{background:#EAF3DE;color:#27500A}
+.badge-sales{background:#FAEEDA;color:#633806}
+.badge-eng{background:#EEEDFE;color:#3C3489}
+.badge-hr{background:#FAECE7;color:#4A1B0C}
+.badge-mkt{background:#FBEAF0;color:#4B1528}
+.badge-legal{background:#E6F1FB;color:#0C447C}
+.badge-cs{background:#E1F5EE;color:#085041}
+h1{font-size:25px;font-weight:500;line-height:1.25;margin-bottom:6px}
+.subtitle{font-size:15px;color:var(--color-text-secondary);margin-bottom:22px;line-height:1.5}
+.section-body p{margin-bottom:14px}
+.info-box{border-left:3px solid #378ADD;background:#E6F1FB;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#185FA5}
+.warn-box{border-left:3px solid #EF9F27;background:#FAEEDA;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#633806}
+.success-box{border-left:3px solid #639922;background:#EAF3DE;border-radius:0 6px 6px 0;padding:11px 15px;margin:14px 0;font-size:13.5px;color:#27500A}
+h2{font-size:17px;font-weight:500;margin:24px 0 8px}
+h3{font-size:14px;font-weight:500;margin:18px 0 6px}
+ul,ol{margin:6px 0 12px 18px}
+li{margin-bottom:4px;font-size:14.5px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+th{background:var(--color-background-secondary);padding:7px 11px;text-align:left;font-weight:500;font-size:11.5px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+td{padding:8px 11px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--color-background-secondary)}
+code{font-family:var(--font-mono,monospace);font-size:12px;background:var(--color-background-secondary);padding:2px 5px;border-radius:4px}
+pre{background:#1e2330;border-radius:8px;padding:14px;margin:14px 0;overflow-x:auto}
+pre code{background:none;color:#c9d1e0;font-size:11.5px;padding:0}
+.step-flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:14px 0}
+.step-pill{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:5px 12px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.step-arrow{color:var(--color-text-tertiary);font-size:13px}
+.screenshot-placeholder{background:var(--color-background-secondary);border:0.5px dashed var(--color-border-secondary);border-radius:8px;height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:14px 0;gap:7px}
+.screenshot-placeholder span{font-size:11.5px;color:var(--color-text-tertiary);text-align:center;max-width:240px;line-height:1.4;font-style:italic}
+.prompt-block{position:relative;background:#1e2330;border-radius:8px;padding:14px 44px 14px 14px;margin:10px 0}
+.prompt-block code{color:#c9d1e0;font-size:12px;white-space:pre-wrap;word-break:break-word;background:none;padding:0}
+.copy-btn{position:absolute;top:9px;right:9px;background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.15);border-radius:5px;padding:3px 8px;font-size:11px;color:#a0aabf;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+.go-deeper{display:flex;align-items:center;gap:12px;margin-top:28px;padding:16px 18px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px}
+.go-deeper-text strong{font-size:13.5px;font-weight:500;display:block;margin-bottom:1px}
+.go-deeper-text span{font-size:12px;color:var(--color-text-secondary)}
+.go-deeper-btn{display:inline-flex;align-items:center;gap:5px;background:#185FA5;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:12.5px;font-weight:500;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .15s;flex-shrink:0}
+.go-deeper-btn:hover{background:#0C447C}
+.dept-banner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:13px}
+</style>
+
+<div class="shell">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">RealPage</div>
+    <div class="sidebar-title">Claude Cowork Training Guide</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pbar" style="width:0%"></div></div>
+    <div class="progress-label" id="plabel">0 of 0 sections visited</div>
+  </div>
+  <div class="dept-bar" id="dept-bar"></div>
+  <nav class="sidebar-nav" id="nav"></nav>
+  <div class="sidebar-footer"><button class="reset-btn" onclick="resetProgress()">Reset progress</button></div>
+</aside>
+<main class="content" id="main">
+  <div class="content-inner" id="section-content"></div>
+</main>
+</div>
+
+<script>
+const DEPTS = [
+  {id:'core', label:'Core', cls:'', badgeCls:'badge-core', color:'#185FA5'},
+  {id:'fin',  label:'Finance', cls:'dept-fin', badgeCls:'badge-fin', color:'#27500A'},
+  {id:'sales',label:'Sales', cls:'dept-sales', badgeCls:'badge-sales', color:'#633806'},
+  {id:'eng',  label:'Product & Eng', cls:'dept-eng', badgeCls:'badge-eng', color:'#3C3489'},
+  {id:'hr',   label:'HR / People', cls:'dept-hr', badgeCls:'badge-hr', color:'#4A1B0C'},
+  {id:'mkt',  label:'Marketing', cls:'dept-mkt', badgeCls:'badge-mkt', color:'#4B1528'},
+  {id:'legal',label:'Legal', cls:'dept-legal', badgeCls:'badge-legal', color:'#0C447C'},
+  {id:'cs',   label:'Customer Success', cls:'dept-cs', badgeCls:'badge-cs', color:'#085041'},
+];
+
+const ALL_SECTIONS = [
+// ── CORE ──────────────────────────────────────────────────────────────────
+{dept:'core',id:'c-welcome',num:'01',group:'Getting Started',title:'Welcome & overview',subtitle:'What Cowork is and how this guide works.',
+content:`<p>This guide covers everything you need to start using Claude Cowork — Anthropic's desktop AI agent that executes real tasks on your computer, not just answers questions.</p>
+<div class="info-box">Use the department tabs above the sidebar to navigate to role-specific modules after completing the core sections.</div>
+<h2>What you'll learn</h2>
+<ul><li>How Cowork differs from Claude Chat</li><li>How to set it up on your Windows PC</li><li>How to connect Microsoft 365 (Outlook, Teams, OneDrive, SharePoint)</li><li>How to write tasks that get great results</li><li>Department-specific workflows for your role</li></ul>
+<h2>How to use this guide</h2>
+<p>Work through the <strong>Core</strong> sections first (01–08). Then switch to your department tab for role-specific prompts and workflows. Every section ends with a <strong>Practice with Claude</strong> button that opens a live, pre-loaded conversation.</p>`,
+prompt:'I\'m starting to learn Claude Cowork at RealPage. Give me a plain-English overview of what it is, how it differs from Claude Chat, and the 3 most important things I should set up first.'},
+
+{dept:'core',id:'c-whatis',num:'02',group:'Getting Started',title:'Cowork vs. Chat vs. Code',subtitle:'Which tool to use and when.',
+content:`<p>Claude has three modes. Picking the right one makes a big difference.</p>
+<table><tr><th></th><th>Claude Chat</th><th>Claude Cowork</th><th>Claude Code</th></tr>
+<tr><td>Best for</td><td>Questions, brainstorming, drafts</td><td>Autonomous file work & workflows</td><td>Software development</td></tr>
+<tr><td>How you interact</td><td>Back-and-forth conversation</td><td>Describe outcome, step away</td><td>Hands-on coding with Claude</td></tr>
+<tr><td>File access</td><td>Upload manually each time</td><td>Persistent folder access, read/write</td><td>Full project directory</td></tr>
+<tr><td>Scheduling</td><td>No</td><td>Yes — daily, weekly tasks</td><td>No</td></tr>
+<tr><td>Integrations</td><td>None</td><td>M365, Teams, Slack, CRM, and more</td><td>Git, package managers</td></tr></table>
+<div class="info-box">Rule of thumb: brainstorm in Chat → execute in Cowork → build software in Code.</div>
+<h2>What Cowork can do with your files</h2>
+<ul><li>Read Excel, Word, PDF, PowerPoint files</li><li>Create new spreadsheets, reports, and presentations</li><li>Rename, sort, and organize folders</li><li>Extract and summarize data across many documents</li><li>Run tasks on a schedule (e.g., every Monday at 8 AM)</li></ul>
+<div class="warn-box">Cowork only accesses folders you explicitly grant it permission to see. It always shows its plan before taking significant actions and will never permanently delete a file without your approval.</div>`,
+prompt:'Give me 5 examples of tasks I should handle in Claude Chat vs. 5 that belong in Claude Cowork. I work at RealPage and use Microsoft 365.'},
+
+{dept:'core',id:'c-install',num:'03',group:'Setup',title:'Download & install',subtitle:'Get Claude Desktop running on Windows.',
+content:`<div class="step-flow"><div class="step-pill">Go to claude.com/download</div><div class="step-arrow">→</div><div class="step-pill">Click Windows download</div><div class="step-arrow">→</div><div class="step-pill">Run the .exe installer</div><div class="step-arrow">→</div><div class="step-pill">Launch from Start menu</div></div>
+<div class="screenshot-placeholder"><span>Screenshot: Claude Desktop installer and Windows Start menu shortcut</span></div>
+<div class="warn-box">The Claude Desktop app must stay open while a task is running. If you close it, the task stops.</div>
+<h2>Log in</h2>
+<p>Sign in with your RealPage enterprise credentials — the same email you use for Claude in the browser. No new account needed.</p>
+<h2>Switch to Cowork mode</h2>
+<p>At the top of Claude Desktop, click the <strong>Cowork</strong> tab.</p>
+<div class="step-flow"><div class="step-pill">Chat</div><div class="step-arrow">|</div><div class="step-pill" style="background:#E6F1FB;color:#185FA5;border-color:#B5D4F4">Cowork ✓</div><div class="step-arrow">|</div><div class="step-pill">Code</div></div>`,
+prompt:'I just installed Claude Desktop at RealPage. Walk me through the Cowork tab setup — what should I configure in the first 10 minutes to get the most value?'},
+
+{dept:'core',id:'c-folder',num:'04',group:'Setup',title:'Create your work folder',subtitle:'Set up a safe, dedicated space for Cowork to access.',
+content:`<p>Before giving Cowork access to files, create a dedicated folder. Start narrow — don't point Cowork at your entire Documents folder until you're comfortable with how it works.</p>
+<h2>Suggested folder structure</h2>
+<div class="prompt-block"><code>Claude_Work/
+├── context/
+│   ├── about-me.md        ← your role, preferences, standing rules
+│   └── current-projects.md ← what you're working on right now
+├── Inbox/                 ← files to process
+├── Drafts/                ← outputs in progress
+└── Archive/</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="step-flow"><div class="step-pill">Click "Work in a Folder"</div><div class="step-arrow">→</div><div class="step-pill">Select Claude_Work</div><div class="step-arrow">→</div><div class="step-pill">Select "Always Allow"</div></div>
+<div class="screenshot-placeholder"><span>Screenshot: Folder permission dialog in Cowork</span></div>
+<h2>Context files — brief Cowork once, not every session</h2>
+<p>Create an <code>about-me.md</code> with your name, role, formatting preferences, and standing rules. Reference it at the start of any task:</p>
+<div class="prompt-block"><code>"Read about-me.md and current-projects.md before starting. Then..."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me write an about-me.md context file for Claude Cowork. Ask me a few questions about my role and preferences at RealPage, then draft the file.'},
+
+{dept:'core',id:'c-m365',num:'05',group:'Setup',title:'Connect Microsoft 365',subtitle:'Give Cowork access to Outlook, Teams, OneDrive, and SharePoint.',
+content:`<div class="step-flow"><div class="step-pill">Click "+" in Cowork</div><div class="step-arrow">→</div><div class="step-pill">Connectors</div><div class="step-arrow">→</div><div class="step-pill">Toggle Microsoft 365</div><div class="step-arrow">→</div><div class="step-pill">Complete OAuth sign-in</div></div>
+<div class="screenshot-placeholder"><span>Screenshot: Connectors panel showing Microsoft 365 toggle enabled</span></div>
+<table><tr><th>App</th><th>What Claude can do</th></tr>
+<tr><td>Outlook</td><td>Read, search, draft emails; summarize threads; flag action items</td></tr>
+<tr><td>Teams</td><td>Read channels and threads; summarize conversations; draft replies</td></tr>
+<tr><td>OneDrive</td><td>Search and fetch files without downloading</td></tr>
+<tr><td>SharePoint</td><td>Access shared document libraries and site files</td></tr>
+<tr><td>Excel / Word / PowerPoint</td><td>Read content directly for analysis or rebuilding</td></tr></table>
+<h2>Local folder vs. M365 connector</h2>
+<table><tr><th>Capability</th><th>Local folder</th><th>With M365 connector</th></tr>
+<tr><td>Read local Office files</td><td>✅</td><td>✅</td></tr>
+<tr><td>Access SharePoint libraries</td><td>❌</td><td>✅</td></tr>
+<tr><td>Read Teams channels</td><td>❌</td><td>✅</td></tr>
+<tr><td>Draft & save Outlook emails</td><td>❌</td><td>✅</td></tr>
+<tr><td>Access OneDrive without downloading</td><td>❌</td><td>✅</td></tr></table>
+<div class="info-box">RealPage primarily uses Teams. If your team also uses Slack, you can connect it from the same Connectors panel.</div>`,
+prompt:'I just connected Microsoft 365 in Claude Cowork. Give me 5 practical workflows I can now run using Outlook, Teams, and SharePoint that I couldn\'t do with local files alone.'},
+
+{dept:'core',id:'c-global',num:'06',group:'Setup',title:'Global instructions',subtitle:'Set your preferences once — applied to every session.',
+content:`<div class="step-flow"><div class="step-pill">Settings → Cowork</div><div class="step-arrow">→</div><div class="step-pill">Edit Global Instructions</div><div class="step-arrow">→</div><div class="step-pill">Save</div></div>
+<h2>Starter template — customize for your role</h2>
+<div class="prompt-block"><code>I work at RealPage in [your department]. I use Microsoft 365 — Outlook, 
+Teams, OneDrive, Excel, Word, and PowerPoint. Use professional language 
+appropriate for internal business communication. When creating documents, 
+include an executive summary at the top. Flag anything that looks 
+unusual or needs my review. Save outputs as new files — never modify 
+the originals.</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>The safety meta-prompt</h2>
+<p>Add this to the start of any complex task to prevent common mistakes:</p>
+<div class="prompt-block"><code>When working on this task: ask a clarifying question if anything is 
+ambiguous, narrate what you're doing at each step, and pause before 
+any action that deletes or overwrites a file. Save all outputs as new 
+files rather than modifying originals.</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me write Global Instructions for Claude Cowork. I work at RealPage — ask me about my role and tools, then generate the text I should paste into Settings.'},
+
+{dept:'core',id:'c-tasks',num:'07',group:'Running Tasks',title:'Writing a good task',subtitle:'How to brief Cowork like a smart colleague.',
+content:`<p>Don't ask Claude a question — give it a clear assignment. A good task answers three things:</p>
+<ul><li><strong>Input:</strong> which files or data?</li><li><strong>Output:</strong> what file, format, or result?</li><li><strong>Rules:</strong> any naming conventions, flags, or formatting preferences?</li></ul>
+<h2>Before vs. after</h2>
+<table><tr><th>Weak</th><th>Strong</th></tr>
+<tr><td>"Help me with this report."</td><td>"I have Q1 data in 'Sales_Q1.xlsx'. Summarize it by region, create a Word doc called 'Q1_Summary.docx' with an executive summary at the top, and flag any region down more than 10% vs. last quarter."</td></tr>
+<tr><td>"Organize my downloads."</td><td>"Sort all files in the Inbox folder by type. Rename PDFs as YYYY-MM-DD-description.pdf. Move images to Archive/Images, docs to Drafts. Flag anything older than 90 days."</td></tr></table>
+<div class="info-box">Add "then review it and fix any issues" to the end of any request — Claude will self-check before saving. It catches most errors automatically.</div>
+<h2>Mid-task instructions</h2>
+<p>If you think of something while Cowork is running, click <strong>+</strong> to queue an additional instruction. It adds it without starting over.</p>
+<h2>Choosing the right model</h2>
+<table><tr><th>Model</th><th>Best for</th></tr>
+<tr><td>Haiku</td><td>Quick formatting, simple Q&A, grammar checks</td></tr>
+<tr><td>Sonnet</td><td>Most everyday tasks — reports, analysis, drafts</td></tr>
+<tr><td>Opus</td><td>Complex, multi-step reasoning tasks</td></tr></table>`,
+prompt:'Give me 6 examples of weak Cowork task prompts rewritten as strong ones, covering a mix of document creation, file organization, email drafting, and data analysis. I work at RealPage.'},
+
+{dept:'core',id:'c-schedule',num:'08',group:'Running Tasks',title:'Scheduled tasks',subtitle:'Set recurring tasks once — Cowork runs them automatically.',
+content:`<p>Cowork can re-run any workflow on a schedule. Describe the task, then add a frequency — Claude handles the rest.</p>
+<h2>Two ways to schedule</h2>
+<div class="step-flow"><div class="step-pill">Type /schedule in any Cowork task</div><div class="step-arrow">→</div><div class="step-pill">Describe the task</div><div class="step-arrow">→</div><div class="step-pill">Set the frequency</div><div class="step-arrow">→</div><div class="step-pill">Confirm</div></div>
+<p>Or go to <strong>Settings → Cowork → Scheduled Tasks</strong> to manage all active schedules in one place.</p>
+<table><tr><th>Frequency</th><th>Example phrase</th></tr>
+<tr><td>Daily</td><td>"Every weekday at 8:30 AM"</td></tr>
+<tr><td>Weekly</td><td>"Every Monday at 9:00 AM"</td></tr>
+<tr><td>Monthly</td><td>"First business day of each month"</td></tr>
+<tr><td>Custom</td><td>Cron syntax: <code>0 9 * * 1-5</code></td></tr></table>
+<h2>Starter scheduled tasks for any RealPage employee</h2>
+<table><tr><th>Task</th><th>Schedule</th></tr>
+<tr><td>Morning briefing — unread Outlook emails + Teams highlights + today's calendar</td><td>Weekdays, 8:30 AM</td></tr>
+<tr><td>Weekly summary of new files added to your work folder</td><td>Monday, 9:00 AM</td></tr>
+<tr><td>Inbox cleanup — sort and rename files added this week</td><td>Friday, 5:00 PM</td></tr>
+<tr><td>Monthly report draft from recurring data source</td><td>1st of each month, 8:00 AM</td></tr></table>
+<h2>Morning briefing prompt — copy and schedule</h2>
+<div class="prompt-block"><code>"Every weekday at 8:30 AM: pull my unread Outlook emails from the 
+last 18 hours (subject, sender, one-line summary), read the last 
+24 hours of my key Teams channels, and list today's calendar events. 
+Compile into a Word doc called 'Briefing_[Date].docx' in my Drafts folder."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="warn-box">Scheduled tasks only run while Claude Desktop is open and your computer is awake. For reliable automation, keep the app running during working hours. Missed tasks run automatically the next time the app opens.</div>`,
+prompt:'Help me set up 3 scheduled recurring tasks in Claude Cowork that would save me real time each week — a morning briefing from Outlook and Teams, a weekly file summary, and one task specific to my role. Walk me through the /schedule command and what each prompt should include.'},
+
+{dept:'core',id:'c-projects',num:'09',group:'Running Tasks',title:'Projects',subtitle:'Give Claude a permanent desk for each area of your work.',
+content:`<p>A Project is a persistent workspace in Claude — it has its own memory, instructions, files, and scheduled tasks that carry over between sessions. Think of it as assigning Claude a dedicated role for one part of your job.</p>
+<div class="info-box">Without Projects, every new chat starts blank. With a Project, Claude already knows your context, preferences, and what you're working on — no re-briefing needed.</div>
+<h2>What a Project gives you</h2>
+<table><tr><th>Feature</th><th>What it means in practice</th></tr>
+<tr><td>Persistent instructions</td><td>Set rules once — "always use USD, flag items over $25K, use our report template" — and they apply to every task in that project</td></tr>
+<tr><td>Persistent files</td><td>Upload your chart of accounts, style guide, or report template once; Claude references it every session without reprocessing</td></tr>
+<tr><td>Scoped memory</td><td>Claude remembers decisions, preferences, and past work within the project across sessions</td></tr>
+<tr><td>Isolated scheduled tasks</td><td>Recurring tasks are tied to the project, not the chat</td></tr></table>
+<h2>Good candidates for a dedicated Project</h2>
+<ul><li>Weekly or monthly reports you run on a recurring cycle</li><li>A content pipeline or campaign you manage ongoing</li><li>A long-running client or account relationship</li><li>Your team's recurring operations (close process, sprint cycle, hiring pipeline)</li></ul>
+<h2>How to create a Project</h2>
+<div class="step-flow"><div class="step-pill">Click Projects in sidebar</div><div class="step-arrow">→</div><div class="step-pill">New Project</div><div class="step-arrow">→</div><div class="step-pill">Add instructions</div><div class="step-arrow">→</div><div class="step-pill">Upload reference files</div><div class="step-arrow">→</div><div class="step-pill">Start working</div></div>
+<div class="screenshot-placeholder"><span>Screenshot: Projects panel showing active projects with instruction summaries</span></div>
+<h2>Project instructions template</h2>
+<div class="prompt-block"><code>Project: [Name]
+Purpose: [What this project handles]
+My role: [Your title and team]
+Output format: [e.g., "Always save as .docx with executive summary at top"]
+Standing rules: [e.g., "Flag anything over $25K", "Use USD", "Professional tone"]
+Reference files in this project: [list key files Claude should always use]
+Do not: [anything Claude should never do in this context]</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me set up a Claude Project for the most important recurring work I do. Ask me about my role and what workflows I run repeatedly, then recommend how many projects I should create and what instructions to put in each one.'},
+
+{dept:'core',id:'c-memory',num:'10',group:'Running Tasks',title:'Persistent memory',subtitle:'Claude remembers your preferences across every session.',
+content:`<p>On paid plans, Claude maintains a memory of facts about you and your work that persists across all conversations — not just within a single chat or project. You can view, edit, and delete these memories at any time.</p>
+<h2>What memory is good for</h2>
+<ul><li>Your role, team, and company context — so you never have to re-introduce yourself</li><li>Preferred output formats ("always use bullet points for action items", "executive summary first")</li><li>Recurring project names and acronyms Claude should recognize</li><li>Standing rules ("always flag items over $25K", "never modify original files")</li><li>Tool preferences ("I use Excel, not Google Sheets", "I work in Teams not Slack")</li></ul>
+<h2>How to set it up</h2>
+<div class="step-flow"><div class="step-pill">Settings → Memory</div><div class="step-arrow">→</div><div class="step-pill">View existing memories</div><div class="step-arrow">→</div><div class="step-pill">Edit or add entries</div></div>
+<div class="info-box">Claude also builds memory automatically from your conversations. Review it periodically — if Claude learned something wrong, edit it directly in Settings → Memory.</div>
+<h2>Starter memory entries for RealPage employees</h2>
+<div class="prompt-block"><code>I work in [Department] at RealPage. My role is [Title].
+I use Microsoft 365 — Outlook, Teams, OneDrive, Excel, Word, PowerPoint.
+My primary Teams channel for [work area] is [channel name].
+Output format preference: executive summary first, bullet points for action items.
+Always use USD currency formatting.
+Never modify original files — always save outputs as new files.
+Flag anything unusual or that needs my review.
+Acronyms I use: [list your team's acronyms and what they mean]</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="warn-box">Memory is stored per user account, not per device. It applies across Claude Chat, Cowork, and Code on all your devices.</div>`,
+prompt:'Help me set up my Claude persistent memory for working at RealPage. Ask me about my role, tools, formatting preferences, and standing rules — then generate the memory entries I should add in Settings → Memory.'},
+
+{dept:'core',id:'c-artifacts',num:'11',group:'Running Tasks',title:'Artifacts',subtitle:'A live canvas for documents you build and refine iteratively.',
+content:`<p>When Claude creates a document, report, spreadsheet, or piece of code, it can open it in an Artifact panel — a persistent side-by-side workspace next to the chat. Instead of scrolling through long messages, you work in the Artifact directly.</p>
+<h2>When Artifacts are most useful</h2>
+<table><tr><th>Use case</th><th>Why Artifacts help</th></tr>
+<tr><td>Drafting a report or document</td><td>The document stays open while you give feedback in chat — Claude updates it in place</td></tr>
+<tr><td>Building a structured template</td><td>Iterate on structure and content without losing the whole doc in chat history</td></tr>
+<tr><td>Creating a dashboard or data visualization</td><td>See it render live as Claude builds it</td></tr>
+<tr><td>Writing and refining a prompt</td><td>Keep the prompt in the Artifact, test and adjust it in chat</td></tr></table>
+<h2>How to use Artifacts</h2>
+<p>You don't need to do anything special — when Claude produces something substantial (a document, structured output, or code), it opens in the Artifact panel automatically. You can then:</p>
+<ul><li>Ask Claude to revise specific sections without rewriting the whole thing</li><li>Copy the final version directly from the Artifact pane</li><li>Download it as a file</li><li>Ask Claude to keep working on it across multiple turns</li></ul>
+<div class="info-box">Practical tip: when drafting a Word report or slide outline, say "keep this in an Artifact and update it as we refine it." This keeps the document clean and separate from your instructions, rather than re-pasting the whole thing every turn.</div>
+<h2>Example — iterative report drafting</h2>
+<div class="prompt-block"><code>"Draft a Q1 performance summary based on the data in this folder. 
+Keep it in an Artifact. I'll give you feedback section by section 
+and you update it in place. Start with the executive summary."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Explain how Claude Artifacts work and show me how to use them to iteratively draft and refine a business report. I want to understand how to give section-by-section feedback without losing the document.'},
+
+{dept:'core',id:'c-computer',num:'12',group:'Running Tasks',title:'Computer use',subtitle:'Claude controls your desktop when no connector exists.',
+content:`<p>On Pro and Max plans, Cowork can take control of your actual desktop — moving the mouse, clicking, typing, and interacting with apps that have no API or connector.</p>
+<div class="info-box">Use computer use only when no MCP connector or browser integration can handle the task. It's slower and uses more resources than a direct API connection — but it's the only option for legacy tools, internal dashboards, and systems without public APIs.</div>
+<h2>What Claude can do</h2>
+<ul><li>Take screenshots to see your current screen state</li><li>Click buttons, links, checkboxes, and menus</li><li>Type text and fill forms</li><li>Navigate between applications</li><li>Execute keyboard shortcuts</li><li>Interact with native Windows apps</li></ul>
+<h2>Good use cases at RealPage</h2>
+<ul><li>Internal tools and dashboards with no API access</li><li>Legacy systems that predate modern integrations</li><li>Web portals that require complex login flows</li><li>Repetitive copy-paste work between apps that can't be connected directly</li></ul>
+<h2>Permission tiers</h2>
+<table><tr><th>Tier</th><th>What Claude can access</th><th>When to use</th></tr>
+<tr><td>UI Only</td><td>Visual elements — text, buttons, forms</td><td>Default — lowest risk</td></tr>
+<tr><td>App Control</td><td>Can open and interact with specific apps</td><td>Automating native apps</td></tr>
+<tr><td>System Access</td><td>File system, settings, system commands</td><td>Advanced only</td></tr></table>
+<div class="warn-box">Computer use runs on your real desktop — not in a sandbox. Your screen must be active (not locked). Claude will ask permission before accessing each new application. Available on Pro and Max plans only. Never use it with banking apps, password managers, or security software.</div>
+<h2>How to enable it</h2>
+<div class="step-flow"><div class="step-pill">Open a Cowork task</div><div class="step-arrow">→</div><div class="step-pill">Click "Use Computer"</div><div class="step-arrow">→</div><div class="step-pill">Grant app permission when prompted</div><div class="step-arrow">→</div><div class="step-pill">Describe what you want done</div></div>
+<div class="screenshot-placeholder"><span>Screenshot: Computer use permission dialog in Claude Desktop</span></div>`,
+prompt:'Explain how Claude computer use works in Cowork and when I should use it vs. an MCP connector or browser automation. Give me 3 examples of real tasks at a company like RealPage where computer use would be the right choice.'},
+
+{dept:'core',id:'c-efficiency',num:'13',group:'Running Tasks',title:'Token efficiency',subtitle:'Get more done per session with a few simple habits.',
+content:`<p>Claude limits by tokens — the total amount of text processed per session. Every message re-reads the full conversation history, so long chats get expensive fast. A few habits make a real difference.</p>
+<table><tr><th>Habit</th><th>Why it helps</th></tr>
+<tr><td>Edit your prompt instead of sending a correction</td><td>Replaces the exchange instead of stacking it — Claude re-reads less</td></tr>
+<tr><td>Start a fresh chat every 15–20 messages</td><td>Ask Claude to summarize → copy → paste as first message in new chat</td></tr>
+<tr><td>Batch multiple questions into one message</td><td>Three tasks in one prompt = one context load, not three</td></tr>
+<tr><td>Use Projects for recurring reference files</td><td>Upload once; every session in that project references it without reprocessing</td></tr>
+<tr><td>Set Memory & Preferences once</td><td>Stops you re-explaining "I work in Finance at RealPage..." every session</td></tr>
+<tr><td>Turn off Search and Tools when not needed</td><td>Tools add tokens to every response even when unused</td></tr>
+<tr><td>Spread work across the day</td><td>Claude uses a rolling 5-hour usage window — two sessions beats one marathon</td></tr></table>
+<h2>Choosing the right model</h2>
+<table><tr><th>Model</th><th>Best for</th></tr>
+<tr><td>Haiku</td><td>Quick formatting, grammar checks, simple Q&A</td></tr>
+<tr><td>Sonnet</td><td>Most everyday work — reports, analysis, drafts, data tasks</td></tr>
+<tr><td>Opus</td><td>Complex multi-step reasoning, deep analysis, hard problems</td></tr></table>
+<div class="info-box">For most file organization, report drafting, and data extraction tasks, Sonnet is the right choice. Save Opus for tasks where a first Sonnet attempt wasn't sufficient.</div>`,
+prompt:'Give me a practical cheat sheet for using Claude Cowork efficiently. What are the most important habits to avoid hitting token limits, and how do I choose between Haiku, Sonnet, and Opus for different types of work?'},
+
+// ── FINANCE ───────────────────────────────────────────────────────────────
+{dept:'fin',id:'f-overview',num:'F1',group:'Finance Module',title:'Finance overview',subtitle:'What Cowork can do for the Finance org at RealPage.',
+content:`<div class="dept-banner" style="background:#EAF3DE;border:0.5px solid #C0DD97"><span style="font-size:20px">📊</span><div><strong style="color:#27500A">Finance Module</strong><br><span style="color:#3B6D11;font-size:12px">Complete the Core sections first, then work through these Finance-specific workflows.</span></div></div>
+<p>Cowork is particularly powerful for Finance because so much Finance work follows repeatable patterns: extract data from files, compare two datasets, flag anomalies, produce a formatted output. These are exactly the tasks Cowork was built for.</p>
+<h2>High-value Finance workflows covered in this module</h2>
+<table><tr><th>Workflow</th><th>Time saved</th></tr>
+<tr><td>Invoice extraction and organization</td><td>Hours → minutes</td></tr>
+<tr><td>AP/AR reconciliation against bank statements</td><td>Manual matching → automated output</td></tr>
+<tr><td>Budget vs. actuals variance analysis</td><td>Build + format in one step</td></tr>
+<tr><td>Multi-entity consolidation</td><td>Template-driven rebuild</td></tr>
+<tr><td>Month-end close tracking and status updates</td><td>Automated tracker + Teams post</td></tr>
+<tr><td>Audit support schedule preparation</td><td>Index + PBC matching automated</td></tr></table>
+<div class="info-box">Install the Financial Analysis plugin before starting: Customize → Browse Plugins → Finance → Financial Analysis. It significantly improves accuracy on reconciliation and modeling tasks.</div>`,
+prompt:'I work in Finance at RealPage. Give me an overview of the top 5 ways Claude Cowork can save me time on everyday Finance tasks — focus on Excel-heavy work, AP/AR, and month-end close.'},
+
+{dept:'fin',id:'f-invoices',num:'F2',group:'Finance Module',title:'Invoice processing',subtitle:'Sort, rename, and extract invoice data at scale.',
+content:`<div class="prompt-block"><code>"I have a folder of PDF invoices. Organize them into subfolders by 
+month. Within each month folder, create a subfolder per currency 
+(USD, EUR, etc.). Read each PDF to extract invoice date and currency."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Extract to Excel summary</h2>
+<div class="prompt-block"><code>"Read all PDFs in Invoices_To_Process. Extract: Vendor Name, Invoice 
+Date, Invoice Number, Total Amount. Create 'Invoice_Summary_[Month].xlsx' 
+with those four columns. Sort by Vendor Name. Flag invoices over $10,000 
+in a 'Review Flag' column."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Rename after sorting</h2>
+<div class="prompt-block"><code>"Rename all PDFs using the format: VendorName_Date_Amount.pdf"</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="screenshot-placeholder"><span>Screenshot: Cowork progress panel showing PDF reads and Excel output</span></div>`,
+prompt:'Walk me through using Claude Cowork to process a folder of 40 vendor invoices — sorting, renaming, and extracting data to Excel. What should I verify to make sure the output is accurate?'},
+
+{dept:'fin',id:'f-recon',num:'F3',group:'Finance Module',title:'Reconciliation',subtitle:'Match invoices to bank statements automatically.',
+content:`<div class="prompt-block"><code>"Reconcile the invoices in this folder against the bank statement in 
+'BankStatement_[Month].xlsx'. Create an Excel file with tabs for: 
+Matched invoices, Amount mismatches, Unpaid invoices, and Bank 
+transactions with no matching invoice. Flag duplicate invoice numbers."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Three-way match (PO + invoice + receipt)</h2>
+<div class="prompt-block"><code>"I have three folders: POs (PDFs), Invoices (PDFs), and GoodsReceipts 
+(Excel). Match each invoice to its PO and goods receipt by PO number. 
+Create 'ThreeWayMatch_[Month].xlsx' with columns: PO#, Vendor, PO Amount, 
+Invoice Amount, Receipt Amount, Match Status, and Flag."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="warn-box">Always verify figures in the output before using for reporting. Ask Cowork to show its underlying calculations so you can spot-check.</div>`,
+prompt:'Help me build an AP reconciliation workflow in Claude Cowork. What format should my bank statement export be in? How should I handle edge cases like partial payments and duplicate invoice numbers?'},
+
+{dept:'fin',id:'f-bva',num:'F4',group:'Finance Module',title:'Variance analysis & FP&A',subtitle:'BvA, rolling forecasts, and scenario models.',
+content:`<h2>Budget vs. actuals</h2>
+<div class="prompt-block"><code>"Compare 'Budget_Q1.xlsx' and 'Actuals_Q1.xlsx' by department and line 
+item. Create 'Q1_Variance_Analysis.xlsx' with Budget, Actual, Variance ($), 
+Variance (%) columns. Flag rows where variance exceeds 10% either 
+direction. Use green/red conditional formatting."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Rolling forecast update</h2>
+<div class="prompt-block"><code>"Update 'Forecast_Q2_2026.xlsx' by replacing Q1 forecast figures with 
+Q1 actuals from 'Actuals_Q1_2026.xlsx'. Keep Q2–Q4 unchanged. Add a 
+Last Updated timestamp and a full-year summary tab."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Three-scenario model</h2>
+<div class="prompt-block"><code>"Using 'Budget_FY2026.xlsx' as base, build a three-scenario model 
+(Base, Upside +10% revenue, Downside -15% revenue) in 
+'Scenario_Model_FY2026.xlsx'. Show impact on gross margin, EBITDA, 
+and cash on a summary tab."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a rolling 12-month forecast model in Claude Cowork. My current forecast is in Excel and I need to lock in Q1 actuals. Walk me through the prompt sequence.'},
+
+{dept:'fin',id:'f-close',num:'F5',group:'Finance Module',title:'Month-end close',subtitle:'Trackers, flux analysis, and Teams status updates.',
+content:`<h2>Close tracker</h2>
+<div class="prompt-block"><code>"Create 'MonthEnd_Close_Tracker_[Month].xlsx' with a Checklist tab: 
+Task, Owner, Due Date, Status, Notes. Pre-populate with: bank recon, 
+AR aging review, AP accruals, intercompany eliminations, flux analysis, 
+management reporting package. Highlight overdue items in red."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Flux analysis</h2>
+<div class="prompt-block"><code>"Compare 'Actuals_[Month].xlsx' vs 'Actuals_[Prior Month].xlsx'. 
+Create a flux analysis showing change by line item. Flag any line 
+with month-over-month change greater than 15% or $50K. Include a 
+commentary column."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Teams status update (M365 connector required)</h2>
+<div class="prompt-block"><code>"Using the close tracker, draft a brief status update for the 
+Finance-Close Teams channel: overall % complete, items at risk, 
+blockers. Under 150 words, professional tone."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Scheduled close reminder</h2>
+<div class="prompt-block"><code>"On the 25th of every month at 9 AM, read the close tracker and 
+summarize all Open tasks due within 5 days."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a month-end close support workflow in Claude Cowork — close tracker, flux analysis, and automated Teams status update. What should I verify before sharing outputs with leadership?'},
+
+{dept:'fin',id:'f-audit',num:'F6',group:'Finance Module',title:'Audit & compliance',subtitle:'Audit schedules, duplicate detection, PBC lists, SOX summaries.',
+content:`<div class="warn-box">Cowork activity is not captured in RealPage's audit logs. Do not use Cowork for regulated workloads requiring an audit trail until IT/Security confirms it is appropriate.</div>
+<h2>Audit support index</h2>
+<div class="prompt-block"><code>"Create an audit support index in Excel listing each file in the 
+Reconciliation folder, the schedule it supports (e.g., 'Cash – Note 4'), 
+preparer, and review status (leave blank for me to fill in)."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Duplicate payment detection</h2>
+<div class="prompt-block"><code>"Read 'Payments_Q1_2026.xlsx'. Identify duplicate payments — same 
+vendor, same amount, within 5 business days. Create a report with: 
+Vendor, Amount, Payment Date 1, Payment Date 2, Notes column."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>PBC list population</h2>
+<div class="prompt-block"><code>"For each request in column A of 'Audit_PBC_List.xlsx', check whether 
+a matching file exists in Reconciliation and Reports_Draft. Update 
+column B with 'File Found' or 'Missing', column C with filename."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'How should I use Claude Cowork to prepare for our annual external audit? I need a PBC tracking list, organized support schedules, and a duplicate payment check. What should I verify before giving anything to auditors?'},
+
+// ── SALES ─────────────────────────────────────────────────────────────────
+{dept:'sales',id:'s-overview',num:'S1',group:'Sales Module',title:'Sales overview',subtitle:'How Cowork accelerates sales workflows at RealPage.',
+content:`<div class="dept-banner" style="background:#FAEEDA;border:0.5px solid #FAC775"><span style="font-size:20px">🤝</span><div><strong style="color:#633806">Sales / Account Management Module</strong><br><span style="color:#854F0B;font-size:12px">Complete the Core sections first, then work through these sales-specific workflows.</span></div></div>
+<p>Sales teams spend enormous time on prep, follow-up, and reporting — work that follows predictable patterns. Cowork handles the repetitive parts so you can focus on relationships and closing.</p>
+<h2>High-value Sales workflows in this module</h2>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>Account research briefings</td><td>1-pager in minutes before any call</td></tr>
+<tr><td>CRM data cleanup and enrichment</td><td>Standardize messy pipeline data</td></tr>
+<tr><td>Proposal and follow-up drafts</td><td>Consistent, personalized outreach at scale</td></tr>
+<tr><td>Pipeline reporting</td><td>Weekly summaries from CRM exports</td></tr>
+<tr><td>Meeting prep from Teams/email threads</td><td>Context summary before every customer call</td></tr></table>`,
+prompt:'I work in Sales at RealPage. What are the top 5 ways Claude Cowork can save me time on pre-call prep, follow-up, and pipeline reporting?'},
+
+{dept:'sales',id:'s-research',num:'S2',group:'Sales Module',title:'Account research & meeting prep',subtitle:'One-pagers and call briefs in minutes.',
+content:`<h2>Account research brief</h2>
+<div class="prompt-block"><code>"Research [Company Name]. Create a 1-page Word brief covering: 
+company overview, key products/services, recent news, likely pain 
+points relevant to real estate software, and key contacts. 
+Save as '[CompanyName]_Brief.docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Pre-call prep from email + Teams history (M365 connector required)</h2>
+<div class="prompt-block"><code>"I have a meeting with [Name] at [Company] at 2pm. Search my Outlook 
+for emails from them in the last 60 days. Check the [Teams channel] 
+for any recent mentions. Summarize: open issues, last commitments made, 
+what I should be prepared to address. Save as a Word doc."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Competitor comparison</h2>
+<div class="prompt-block"><code>"Create a competitive comparison between RealPage and [Competitor] 
+covering: key features, pricing model, typical customer profile, 
+known weaknesses. Format as a one-page Word doc I can reference on calls."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a pre-call research workflow in Claude Cowork. I have a meeting with a prospect in 30 minutes. What\'s the fastest way to pull together a useful brief from Outlook, Teams, and web research?'},
+
+{dept:'sales',id:'s-outreach',num:'S3',group:'Sales Module',title:'Proposals & follow-up',subtitle:'Consistent, personalized outreach at scale.',
+content:`<h2>Follow-up email after a call (M365 connector required)</h2>
+<div class="prompt-block"><code>"Read my last email thread with [Contact] in Outlook. Draft a 
+follow-up email that: thanks them for the call, recaps the 3 key 
+points discussed, lists the next steps we agreed on, and includes 
+a soft CTA. Professional tone, under 200 words. Save to Drafts."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Proposal first draft</h2>
+<div class="prompt-block"><code>"Using the notes in 'Discovery_[CompanyName].docx', draft a proposal 
+Word document for [Company]. Include: executive summary of their 
+problem, our recommended solution, key benefits, and proposed next 
+steps. Use our standard proposal template if one exists in the folder."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Batch follow-up drafts from pipeline export</h2>
+<div class="prompt-block"><code>"Read 'Pipeline_Export.xlsx'. For each deal in 'Proposal Sent' stage 
+with no activity in 14+ days, draft a brief check-in email. 
+Personalize the opening line using the company name and deal notes. 
+Save each to Outlook Drafts — do not send."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me set up a follow-up workflow in Claude Cowork. After sales calls, I want to automatically draft a follow-up email based on my Outlook thread history. Walk me through the prompt and what to review before sending.'},
+
+{dept:'sales',id:'s-pipeline',num:'S4',group:'Sales Module',title:'Pipeline reporting',subtitle:'Weekly summaries and CRM cleanup from exports.',
+content:`<h2>Weekly pipeline summary</h2>
+<div class="prompt-block"><code>"Read 'Pipeline_Export.xlsx'. Create a Word summary doc with: 
+total pipeline value by stage, deals closing this month, top 5 
+opportunities by value, and any deals that have gone cold (no 
+activity in 21+ days). Professional format suitable for my manager."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>CRM data cleanup</h2>
+<div class="prompt-block"><code>"Read 'CRM_Export.xlsx'. Identify: missing company names, 
+inconsistent stage labels, duplicate contacts (same email), and 
+deals with no close date. Create a cleanup report highlighting 
+each issue with the row number. Save as 'CRM_Cleanup_Review.xlsx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Scheduled weekly pipeline report</h2>
+<div class="prompt-block"><code>"Every Friday at 4:30 PM, read the latest pipeline export in my 
+Inbox folder and generate a weekly pipeline summary Word doc. 
+Save to Drafts folder."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Build me a weekly pipeline reporting workflow in Claude Cowork. I export my CRM to Excel every Friday. What prompts give me the most useful summary, and how do I schedule it to run automatically?'},
+
+// ── PRODUCT & ENG ─────────────────────────────────────────────────────────
+{dept:'eng',id:'e-overview',num:'E1',group:'Product & Eng Module',title:'Product & Eng overview',subtitle:'How Cowork fits into product and engineering workflows.',
+content:`<div class="dept-banner" style="background:#EEEDFE;border:0.5px solid #CECBF6"><span style="font-size:20px">⚙️</span><div><strong style="color:#3C3489">Product & Engineering Module</strong><br><span style="color:#534AB7;font-size:12px">Complete the Core sections first, then work through these role-specific workflows.</span></div></div>
+<p>For product managers and engineers, Cowork complements Claude Code — handling documentation, sprint reporting, meeting synthesis, and spec drafting while Code handles the actual development work.</p>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>PRD and spec drafting</td><td>First draft from notes in minutes</td></tr>
+<tr><td>Sprint retrospective synthesis</td><td>Action items extracted from meeting notes</td></tr>
+<tr><td>Release notes generation</td><td>From commit messages or ticket exports</td></tr>
+<tr><td>Bug triage report from Jira export</td><td>Prioritized summary for standup or review</td></tr>
+<tr><td>Technical doc summarization</td><td>Dense docs → readable summaries</td></tr></table>`,
+prompt:'I work in Product at RealPage. What are the top 5 ways Claude Cowork can save me time on documentation, sprint reporting, and stakeholder communication — without replacing Claude Code for actual development work?'},
+
+{dept:'eng',id:'e-docs',num:'E2',group:'Product & Eng Module',title:'Documentation & specs',subtitle:'PRDs, specs, and release notes from raw inputs.',
+content:`<h2>PRD first draft from notes</h2>
+<div class="prompt-block"><code>"Read the discovery notes in 'Feature_Notes_[Name].docx'. Draft a 
+Product Requirements Document with: problem statement, target user, 
+success metrics, functional requirements, out of scope, and open 
+questions. Save as 'PRD_[Feature].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Release notes from ticket export</h2>
+<div class="prompt-block"><code>"Read 'Sprint_Tickets_Closed.xlsx'. Generate release notes organized 
+by category (New Features, Improvements, Bug Fixes). Write each item 
+in customer-friendly language — no internal ticket IDs or jargon. 
+Save as 'Release_Notes_v[X.X].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Technical doc summarization</h2>
+<div class="prompt-block"><code>"Read the API documentation in this folder. Create a 2-page summary 
+covering: key endpoints, authentication method, rate limits, and 
+common error codes. Format as a Word doc for non-technical stakeholders."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me draft a Product Requirements Document using Claude Cowork. I have rough discovery notes and user interview summaries in a folder. What\'s the best prompt structure to get a solid first draft?'},
+
+{dept:'eng',id:'e-sprints',num:'E3',group:'Product & Eng Module',title:'Sprint & meeting synthesis',subtitle:'Action items, retros, and standup summaries.',
+content:`<h2>Sprint retrospective synthesis</h2>
+<div class="prompt-block"><code>"Read the retro notes in 'Retro_Sprint[N].docx'. Organize the 
+output into: What went well (bullet list), What didn't go well 
+(bullet list), Action items with owner and due date. Save as 
+a clean Word doc for the team."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Weekly standup summary from Teams (M365 connector required)</h2>
+<div class="prompt-block"><code>"Read the last 5 days of messages in the [Team] Teams channel. 
+Summarize: key decisions made, blockers raised, items that need 
+follow-up, and anything the PM needs to act on. Keep it under 
+one page."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Bug triage from Jira export</h2>
+<div class="prompt-block"><code>"Read 'Jira_Open_Bugs.xlsx'. Prioritize bugs by severity and 
+customer impact. Create a triage summary with: Critical (fix now), 
+High (fix this sprint), Medium (backlog), and a top-5 list for 
+the next standup. Save as 'Bug_Triage_[Date].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'I run sprint retrospectives at RealPage and the notes are always a mess. Help me build a Cowork workflow that turns raw retro notes into a clean action-item doc with owners and due dates.'},
+
+// ── HR ────────────────────────────────────────────────────────────────────
+{dept:'hr',id:'h-overview',num:'H1',group:'HR Module',title:'HR / People Ops overview',subtitle:'How Cowork supports HR and People Operations at RealPage.',
+content:`<div class="dept-banner" style="background:#FAECE7;border:0.5px solid #F5C4B3"><span style="font-size:20px">👥</span><div><strong style="color:#4A1B0C">HR / People Operations Module</strong><br><span style="color:#712B13;font-size:12px">Complete the Core sections first, then work through these HR-specific workflows.</span></div></div>
+<p>HR workflows involve a lot of structured, repetitive document work — job descriptions, offer letters, policy summaries, onboarding materials, and reporting. Cowork handles all of it.</p>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>Job description drafting</td><td>First draft in minutes from a role brief</td></tr>
+<tr><td>Onboarding document prep</td><td>Personalized packs from templates</td></tr>
+<tr><td>Policy summarization</td><td>Dense policy docs → plain-language summaries</td></tr>
+<tr><td>Headcount and attrition reporting</td><td>From HRIS exports to formatted summaries</td></tr>
+<tr><td>Interview question generation</td><td>Role-specific question banks</td></tr></table>`,
+prompt:'I work in HR at RealPage. What are the top 5 ways Claude Cowork can save me time on document creation, reporting, and onboarding prep?'},
+
+{dept:'hr',id:'h-jd',num:'H2',group:'HR Module',title:'Job descriptions & recruiting',subtitle:'Draft JDs, interview questions, and candidate summaries.',
+content:`<h2>Job description from a role brief</h2>
+<div class="prompt-block"><code>"Read the role brief in 'Role_Brief_[Title].docx'. Draft a job 
+description with: role summary, key responsibilities (bullet list), 
+required qualifications, preferred qualifications, and a brief 
+'Why RealPage' closing section. Professional tone. Save as 
+'JD_[Title].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Interview question bank</h2>
+<div class="prompt-block"><code>"Based on the job description in 'JD_[Title].docx', generate an 
+interview question bank with 5 questions per category: Technical 
+skills, Problem-solving, Collaboration, Culture fit, and Role-specific 
+scenarios. Format as a Word doc for interviewers."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Candidate summary from interview notes</h2>
+<div class="prompt-block"><code>"Read interview notes for [Candidate Name] across all interviewer 
+files in this folder. Create a structured summary: strengths, 
+concerns, hiring recommendation, and suggested next steps. 
+Save as '[CandidateName]_Summary.docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a job description drafting workflow in Claude Cowork. I have a rough role brief from a hiring manager. What\'s the best way to turn that into a polished JD and a matching interview question bank?'},
+
+{dept:'hr',id:'h-onboard',num:'H3',group:'HR Module',title:'Onboarding & policy docs',subtitle:'Onboarding packs, policy summaries, and handbooks.',
+content:`<h2>Onboarding pack from template</h2>
+<div class="prompt-block"><code>"Using the onboarding template in 'Onboarding_Template.docx' and the 
+new hire info in 'NewHire_[Name].xlsx', create a personalized 
+onboarding pack for [Name] joining [Team] on [Date]. Include: 
+welcome message, first-week schedule, key contacts, and links to 
+required training. Save as 'Onboarding_[Name].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Policy plain-language summary</h2>
+<div class="prompt-block"><code>"Read 'Policy_[Name].pdf'. Write a plain-language summary — 2 pages 
+max — covering: what the policy requires, what employees must do, 
+key deadlines or thresholds, and who to contact with questions. 
+Avoid legal jargon. Save as 'Policy_Summary_[Name].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Headcount report from HRIS export</h2>
+<div class="prompt-block"><code>"Read 'HRIS_Export_[Month].xlsx'. Create a headcount summary showing: 
+total headcount by department, new hires this month, terminations 
+this month, and open roles. Save as 'Headcount_Summary_[Month].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'I need to create onboarding packs for 3 new hires starting next week, each joining different teams. Help me build a Cowork workflow to generate personalized docs from a shared template efficiently.'},
+
+// ── MARKETING ─────────────────────────────────────────────────────────────
+{dept:'mkt',id:'m-overview',num:'M1',group:'Marketing Module',title:'Marketing overview',subtitle:'How Cowork accelerates content and campaign work.',
+content:`<div class="dept-banner" style="background:#FBEAF0;border:0.5px solid #F4C0D1"><span style="font-size:20px">📣</span><div><strong style="color:#4B1528">Marketing Module</strong><br><span style="color:#72243E;font-size:12px">Complete the Core sections first, then work through these marketing-specific workflows.</span></div></div>
+<p>Marketing involves high-volume content creation, repurposing, and reporting. Cowork handles batch content tasks, campaign briefs, competitive research, and performance summaries.</p>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>Content repurposing</td><td>One long-form piece → multiple formats</td></tr>
+<tr><td>Campaign brief drafting</td><td>Structured briefs from raw strategy notes</td></tr>
+<tr><td>Competitive intelligence reports</td><td>Structured analysis from research</td></tr>
+<tr><td>Performance report summaries</td><td>Dashboard exports → executive summaries</td></tr>
+<tr><td>Email and copy drafts</td><td>On-brand drafts at scale</td></tr></table>`,
+prompt:'I work in Marketing at RealPage. What are the top 5 ways Claude Cowork can save me time on content creation, campaign reporting, and competitive research?'},
+
+{dept:'mkt',id:'m-content',num:'M2',group:'Marketing Module',title:'Content creation & repurposing',subtitle:'From long-form to multi-channel in one workflow.',
+content:`<h2>Repurpose a blog post or article</h2>
+<div class="prompt-block"><code>"Read the blog post in 'Post_[Title].docx'. Create the following 
+from it: (1) a 5-tweet thread, (2) a 150-word LinkedIn post, 
+(3) a 60-second video script, (4) a 3-bullet email newsletter snippet. 
+Preserve the core message and maintain our brand tone. Save each 
+as a separate file."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Campaign brief from strategy notes</h2>
+<div class="prompt-block"><code>"Read 'Campaign_Notes_[Name].docx'. Draft a structured campaign 
+brief with: objective, target audience, key message, channels, 
+content needs, success metrics, and timeline. Save as 
+'Campaign_Brief_[Name].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Batch email subject line variations</h2>
+<div class="prompt-block"><code>"Read 'Email_Draft_[Campaign].docx'. Generate 10 subject line 
+variations: 3 curiosity-driven, 3 benefit-led, 2 question-based, 
+2 urgency-based. Keep each under 50 characters. Save as a list 
+in a Word doc."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'I have a 1500-word thought leadership article that needs to be repurposed for LinkedIn, Twitter, email newsletter, and a short video script. Help me build a Cowork workflow to do all four at once.'},
+
+{dept:'mkt',id:'m-reporting',num:'M3',group:'Marketing Module',title:'Reporting & competitive intel',subtitle:'Performance summaries and competitor analysis.',
+content:`<h2>Campaign performance summary</h2>
+<div class="prompt-block"><code>"Read 'Campaign_Performance_[Month].xlsx'. Create a Word summary 
+covering: total impressions, clicks, conversions, cost per lead, 
+top-performing content, and 3 key takeaways for next month. 
+Suitable for sharing with leadership. Save as 
+'Performance_Summary_[Month].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Competitive intelligence brief</h2>
+<div class="prompt-block"><code>"Research [Competitor]. Create a competitive intelligence brief 
+covering: product overview, key features, pricing model, target 
+customer, recent news or launches, and known weaknesses. 
+Format as a 1-page Word doc. Save as '[Competitor]_Intel.docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Scheduled weekly content digest from Teams (M365 connector)</h2>
+<div class="prompt-block"><code>"Every Monday at 9 AM, read the last 7 days of the Marketing Teams 
+channel. Summarize: campaigns launched, content published, performance 
+highlights, and open action items. Save as 'Weekly_Marketing_Digest_[Date].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a monthly campaign performance reporting workflow in Claude Cowork. I export data from our marketing platform to Excel. What prompts create the most useful executive summary, and how do I make it repeatable each month?'},
+
+// ── LEGAL ─────────────────────────────────────────────────────────────────
+{dept:'legal',id:'l-overview',num:'L1',group:'Legal Module',title:'Legal overview',subtitle:'How Cowork supports Legal and Compliance at RealPage.',
+content:`<div class="dept-banner" style="background:#E6F1FB;border:0.5px solid #B5D4F4"><span style="font-size:20px">⚖️</span><div><strong style="color:#0C447C">Legal / Compliance Module</strong><br><span style="color:#185FA5;font-size:12px">Complete the Core sections first, then work through these legal-specific workflows.</span></div></div>
+<div class="warn-box">Claude Cowork is an AI assistant and does not provide legal advice. All Cowork outputs in Legal workflows must be reviewed and approved by a qualified attorney before reliance or use.</div>
+<p>Legal and compliance teams deal with high volumes of structured documents that follow consistent patterns. Cowork is well-suited to the administrative and organizational side of legal work.</p>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>Contract review prep</td><td>Clause extraction and issue flagging for attorney review</td></tr>
+<tr><td>Policy document summarization</td><td>Dense legal text → plain-language summaries</td></tr>
+<tr><td>Compliance tracking</td><td>Obligation lists from contracts</td></tr>
+<tr><td>Document organization</td><td>Sort and index large contract repositories</td></tr>
+<tr><td>NDA and template comparison</td><td>Flag deviations from standard language</td></tr></table>`,
+prompt:'I work in Legal at RealPage. What are the appropriate ways to use Claude Cowork for legal document workflows — and what are the limits I should be clear about with my team?'},
+
+{dept:'legal',id:'l-contracts',num:'L2',group:'Legal Module',title:'Contract review prep',subtitle:'Clause extraction, obligation tracking, and deviation flagging.',
+content:`<div class="warn-box">These outputs are for attorney review and preparation only — not for legal reliance. Always have a qualified attorney review before taking action.</div>
+<h2>Extract key clauses from a contract</h2>
+<div class="prompt-block"><code>"Read 'Contract_[Name].pdf'. Extract and list the following clauses 
+with the exact section reference: Term and termination, Payment terms, 
+Limitation of liability, Indemnification, Governing law, Confidentiality, 
+and any unusual or non-standard provisions. Save as 
+'ClauseExtract_[Name].docx' for attorney review."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Obligation tracker from contract portfolio</h2>
+<div class="prompt-block"><code>"Read all contracts in the Contracts folder. For each, extract: 
+party names, effective date, expiration date, renewal notice period, 
+and key obligations. Create an Excel tracker called 
+'Contract_Obligations.xlsx' with one row per contract."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>NDA deviation check against standard template</h2>
+<div class="prompt-block"><code>"Compare 'NDA_Counterparty.pdf' against our standard NDA template 
+in 'NDA_Standard.docx'. List every clause that differs from our 
+standard, with the counterparty's version and our standard version 
+side by side. Flag clauses that represent increased risk. 
+Save as 'NDA_Deviation_Report.docx' for attorney review."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a contract review prep workflow in Claude Cowork. I need to extract key clauses and flag deviations from our standard NDA template across a batch of incoming contracts. Walk me through the prompt sequence.'},
+
+{dept:'legal',id:'l-compliance',num:'L3',group:'Legal Module',title:'Compliance & policy',subtitle:'Policy summaries, compliance calendars, and audit prep.',
+content:`<div class="warn-box">All compliance outputs must be reviewed by qualified legal or compliance staff before use.</div>
+<h2>Regulatory policy plain-language summary</h2>
+<div class="prompt-block"><code>"Read 'Regulation_[Name].pdf'. Write a plain-language summary — 
+2 pages max — covering: who is affected, what is required, key 
+deadlines, penalties for non-compliance, and recommended actions. 
+Avoid legal jargon. Save as 'RegSummary_[Name].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Compliance calendar from obligation tracker</h2>
+<div class="prompt-block"><code>"Read 'Contract_Obligations.xlsx'. Identify all upcoming notice 
+deadlines, renewal dates, and reporting obligations in the next 
+90 days. Create a compliance calendar in Excel sorted by date, 
+with contract name, obligation type, and responsible party."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Organize and index a document repository</h2>
+<div class="prompt-block"><code>"Read all files in the Legal_Repository folder. Create an index 
+in Excel listing: filename, document type (NDA / MSA / SOW / Policy / 
+Other), parties involved, effective date if present, and file path. 
+Save as 'Legal_Repository_Index.xlsx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a compliance calendar workflow in Claude Cowork. I have a contract obligation tracker in Excel with expiration dates and notice periods. How do I get a 90-day rolling calendar of upcoming deadlines?'},
+
+// ── CUSTOMER SUCCESS ──────────────────────────────────────────────────────
+{dept:'cs',id:'x-overview',num:'CS1',group:'Customer Success Module',title:'Customer Success overview',subtitle:'How Cowork supports CS and Support teams at RealPage.',
+content:`<div class="dept-banner" style="background:#E1F5EE;border:0.5px solid #9FE1CB"><span style="font-size:20px">🎯</span><div><strong style="color:#085041">Customer Success / Support Module</strong><br><span style="color:#0F6E56;font-size:12px">Complete the Core sections first, then work through these CS-specific workflows.</span></div></div>
+<p>Customer Success teams balance high-volume communication with the need for personalized, context-aware responses. Cowork handles the prep and documentation so you can focus on the customer relationship.</p>
+<table><tr><th>Workflow</th><th>Benefit</th></tr>
+<tr><td>QBR and EBR preparation</td><td>Data-driven presentation decks in minutes</td></tr>
+<tr><td>Customer health summaries</td><td>Account status reports from CRM + usage data</td></tr>
+<tr><td>Escalation documentation</td><td>Structured issue summaries for handoffs</td></tr>
+<tr><td>Renewal prep briefs</td><td>Account history + risk summary before renewal calls</td></tr>
+<tr><td>Support ticket trend analysis</td><td>Patterns from ticket exports → product feedback</td></tr></table>`,
+prompt:'I work in Customer Success at RealPage. What are the top 5 ways Claude Cowork can save me time on account prep, QBRs, and renewal documentation?'},
+
+{dept:'cs',id:'x-qbr',num:'CS2',group:'Customer Success Module',title:'QBR & renewal prep',subtitle:'Account briefs, health summaries, and presentation decks.',
+content:`<h2>QBR presentation deck</h2>
+<div class="prompt-block"><code>"Using the account data in 'Account_[Name]_Data.xlsx' and usage 
+metrics in 'Usage_[Name]_Q[N].xlsx', create a QBR PowerPoint 
+presentation with: executive summary, product adoption metrics, 
+key wins this quarter, open issues and resolution status, and 
+recommended next steps. Use our QBR template if present in the folder."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Renewal prep brief from account history (M365 connector)</h2>
+<div class="prompt-block"><code>"I have a renewal call with [Customer] next week. Search Outlook 
+for emails from their domain in the last 90 days. Check the 
+[CS Teams channel] for recent mentions. Summarize: relationship 
+health, open issues, usage trends, expansion opportunities, 
+and renewal risk factors. Save as '[Customer]_Renewal_Brief.docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Customer health summary report</h2>
+<div class="prompt-block"><code>"Read 'Customer_Health_Export.xlsx'. Create a summary showing: 
+customers by health score tier (Green/Yellow/Red), top 5 at-risk 
+accounts with reason, and top 5 expansion opportunities. 
+Save as 'Health_Summary_[Month].docx' for my manager."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'Help me build a QBR preparation workflow in Claude Cowork. I have account data, usage metrics, and support history in separate Excel files. What\'s the most efficient way to turn those into a polished deck?'},
+
+{dept:'cs',id:'x-support',num:'CS3',group:'Customer Success Module',title:'Escalations & ticket analysis',subtitle:'Escalation docs, handoff summaries, and support trend reports.',
+content:`<h2>Escalation documentation</h2>
+<div class="prompt-block"><code>"Read the email thread with [Customer] in 'Escalation_[Name].docx' 
+and any related support tickets in 'Tickets_[Name].xlsx'. Create 
+a structured escalation summary with: issue description, timeline 
+of events, customer impact, actions taken so far, and recommended 
+next steps. Save as 'Escalation_Summary_[Name].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Support ticket trend analysis</h2>
+<div class="prompt-block"><code>"Read 'Support_Tickets_[Month].xlsx'. Identify: top 5 issue 
+categories by volume, average resolution time by category, 
+tickets open more than 7 days, and any customers with 3+ open 
+tickets. Save a trend report as 'Support_Trends_[Month].docx' 
+suitable for sharing with the Product team."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<h2>Weekly CS digest from Teams (M365 connector)</h2>
+<div class="prompt-block"><code>"Every Monday at 8:30 AM, read the last 7 days of the 
+Customer-Success Teams channel. Summarize: escalations raised, 
+renewals discussed, key account updates, and action items. 
+Save as 'CS_Weekly_Digest_[Date].docx'."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
+prompt:'I manage a book of 40 accounts and I\'m losing track of escalations and open issues. Help me build a Cowork workflow to create a structured escalation log and a weekly account health digest from my Teams channel and email history.'},
+];
+
+const DEPT_LABELS = {core:'Core',fin:'Finance',sales:'Sales',eng:'Product & Eng',hr:'HR / People',mkt:'Marketing',legal:'Legal',cs:'Customer Success'};
+let currentDept = 'core';
+let visited = new Set(JSON.parse(localStorage.getItem('rp2_visited')||'[]'));
+
+function deptSections(d){ return ALL_SECTIONS.filter(s=>s.id.startsWith(d==='core'?'c-':d==='fin'?'f-':d==='sales'?'s-':d==='eng'?'e-':d==='hr'?'h-':d==='mkt'?'m-':d==='legal'?'l-':'x-')) }
+
+function buildDeptBar(){
+  const bar=document.getElementById('dept-bar');
+  bar.innerHTML='';
+  DEPTS.forEach(d=>{
+    const btn=document.createElement('button');
+    btn.className='dept-btn '+(d.cls||'')+(d.id===currentDept?' active':'');
+    btn.textContent=d.label;
+    btn.onclick=()=>switchDept(d.id);
+    bar.appendChild(btn);
+  });
+}
+
+function buildNav(){
+  const nav=document.getElementById('nav');
+  nav.innerHTML='';
+  const secs=deptSections(currentDept);
+  let lastGroup='';
+  secs.forEach(s=>{
+    if(s.group!==lastGroup){
+      if(lastGroup) nav.insertAdjacentHTML('beforeend','<div class="nav-divider"></div>');
+      nav.insertAdjacentHTML('beforeend',`<div class="nav-group">${s.group}</div>`);
+      lastGroup=s.group;
+    }
+    const v=visited.has(s.id)?'visited':'';
+    nav.insertAdjacentHTML('beforeend',`
+      <button class="nav-item ${v}" id="nav-${s.id}" onclick="showSection('${s.id}')">
+        <span class="nav-num">${s.num}</span>
+        <span style="flex:1;text-align:left;line-height:1.3">${s.title}</span>
+        <span class="check"><svg width="13" height="13" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="6.5" fill="#378ADD" opacity=".15"/><path d="M3.5 6.5l2 2 4-4" stroke="#185FA5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>
+      </button>`);
+  });
+}
+
+function updateProgress(){
+  const all=ALL_SECTIONS.length;
+  const v=visited.size;
+  const pct=Math.round(v/all*100);
+  document.getElementById('pbar').style.width=pct+'%';
+  document.getElementById('plabel').textContent=`${v} of ${all} sections visited`;
+}
+
+function switchDept(deptId){
+  currentDept=deptId;
+  buildDeptBar();
+  buildNav();
+  const first=deptSections(deptId)[0];
+  if(first) showSection(first.id);
+}
+
+function showSection(id){
+  const s=ALL_SECTIONS.find(x=>x.id===id);
+  if(!s) return;
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  const navEl=document.getElementById('nav-'+id);
+  if(navEl){navEl.classList.add('active');navEl.classList.add('visited');}
+  visited.add(id);
+  localStorage.setItem('rp2_visited',JSON.stringify([...visited]));
+  updateProgress();
+  const d=DEPTS.find(x=>x.id===s.dept)||DEPTS[0];
+  const prompt=encodeURIComponent(s.prompt);
+  document.getElementById('section-content').innerHTML=`
+    <div class="section-badge ${d.badgeCls}">${s.num} — ${DEPT_LABELS[s.dept]||s.dept}</div>
+    <h1>${s.title}</h1>
+    <p class="subtitle">${s.subtitle}</p>
+    <div class="section-body">${s.content}</div>
+    <div class="go-deeper">
+      <div class="go-deeper-text">
+        <strong>Practice with Claude</strong>
+        <span>Open a live conversation about this topic with a pre-written prompt</span>
+      </div>
+      <a class="go-deeper-btn" href="https://claude.ai/new?q=${prompt}" target="_blank" rel="noopener">Go deeper →</a>
+    </div>`;
+  document.getElementById('main').scrollTop=0;
+}
+
+function copyCode(btn){
+  const code=btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(code).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='Copied!';
+    btn.style.color='#9FE1CB';
+    setTimeout(()=>{btn.textContent=orig;btn.style.color='';},2000);
+  });
+}
+
+function resetProgress(){
+  visited=new Set();
+  localStorage.setItem('rp2_visited','[]');
+  updateProgress();
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('visited'));
+}
+
+buildDeptBar();
+buildNav();
+updateProgress();
+showSection('c-welcome');
+</script>
