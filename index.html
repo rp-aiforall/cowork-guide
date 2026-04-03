@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Cowork Training Guide</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;line-height:1.7;color:var(--color-text-primary);background:var(--color-background-tertiary,#f5f5f3)}
@@ -92,6 +98,8 @@ pre code{background:none;color:#c9d1e0;font-size:11.5px;padding:0}
 .go-deeper-btn:hover{background:#0C447C}
 .dept-banner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:13px}
 </style>
+</head>
+<body>
 
 <div class="shell">
 <aside class="sidebar">
@@ -143,7 +151,7 @@ content:`<p>Claude has three modes. Picking the right one makes a big difference
 <tr><td>Integrations</td><td>Available in chat, per-conversation</td><td>M365, Teams, Slack, CRM, and more</td><td>Git, package managers</td></tr></table>
 <div class="info-box">Rule of thumb: brainstorm in Chat → execute in Cowork → build software in Code.</div>
 <h2>What Cowork can do with your files</h2>
-<ul><li>Read Excel, Word, PDF, PowerPoint files</li><li>Create new spreadsheets, reports, and presentations</li><li>Rename, sort, and organize folders</li><li>Extract and summarize data across many documents</li><li>Run tasks on a schedule (e.g., every Monday at 8 AM)</li></ul>
+<ul><li>Read Excel, Word, PDF, and other supported business documents</li><li>Create drafts, summaries, and structured outputs from those files</li><li>Rename, sort, and organize folders</li><li>Extract and summarize data across many documents</li><li>Run tasks on a schedule (e.g., every Monday at 8 AM)</li></ul>
 <div class="warn-box">Cowork only accesses folders you explicitly grant it permission to see. It always shows its plan before taking significant actions and will never permanently delete a file without your approval.</div>`,
 prompt:'Give me 5 examples of tasks I should handle in Claude Chat vs. 5 that belong in Claude Cowork. I work at RealPage and use Microsoft 365.'},
 
@@ -183,7 +191,7 @@ content:`<div class="step-flow"><div class="step-pill">Click "+" in Cowork</div>
 <tr><td>Teams</td><td>Read channels and threads; summarize conversations; draft replies</td></tr>
 <tr><td>OneDrive</td><td>Search and fetch files without downloading</td></tr>
 <tr><td>SharePoint</td><td>Access shared document libraries and site files</td></tr>
-<tr><td>Excel / Word / PowerPoint</td><td>Read content directly for analysis or rebuilding</td></tr></table>
+<tr><td>Word / Excel and supported document types</td><td>Read content directly for analysis or rebuilding</td></tr></table>
 <h2>Local folder vs. M365 connector</h2>
 <table><tr><th>Capability</th><th>Local folder</th><th>With M365 connector</th></tr>
 <tr><td>Read local Office files</td><td>✅</td><td>✅</td></tr>
@@ -292,7 +300,7 @@ Always use USD currency formatting.
 Never modify original files — always save outputs as new files.
 Flag anything unusual or that needs my review.
 Acronyms I use: [list your team's acronyms and what they mean]</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-<div class="warn-box">Memory is stored per user account, not per device. It applies across Claude Chat, Cowork, and Code on all your devices.</div>`,
+<div class="warn-box">Memory is stored per user account, not per device. It applies across Claude chat surfaces that support memory. Claude Code has its own separate memory workflow and should be configured independently.</div>`,
 prompt:'Help me set up my Claude persistent memory for working at RealPage. Ask me about my role, tools, formatting preferences, and standing rules — then generate the memory entries I should add in Settings → Memory.'},
 
 {dept:'core',id:'c-artifacts',num:'11',group:'Running Tasks',title:'Artifacts',subtitle:'A live canvas for documents you build and refine iteratively.',
@@ -313,22 +321,16 @@ Keep it in an Artifact. I'll give you feedback section by section
 and you update it in place. Start with the executive summary."</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>`,
 prompt:'Explain how Claude Artifacts work and show me how to use them to iteratively draft and refine a business report. I want to understand how to give section-by-section feedback without losing the document.'},
 
-{dept:'core',id:'c-computer',num:'12',group:'Running Tasks',title:'Computer use',subtitle:'Claude controls your desktop when no connector exists.',
-content:`<p>On Pro and Max plans, Cowork can take control of your actual desktop — moving the mouse, clicking, typing, and interacting with apps that have no API or connector.</p>
-<div class="info-box">Use computer use only when no MCP connector or browser integration can handle the task. It's slower and uses more resources than a direct API connection — but it's the only option for legacy tools, internal dashboards, and systems without public APIs.</div>
-<h2>What Claude can do</h2>
-<ul><li>Take screenshots to see your current screen state</li><li>Click buttons, links, checkboxes, and menus</li><li>Type text and fill forms</li><li>Navigate between applications</li><li>Execute keyboard shortcuts</li><li>Interact with native Windows apps</li></ul>
+{dept:'core',id:'c-computer',num:'12',group:'Running Tasks',title:'Computer use',subtitle:'Advanced capability; availability varies by product and workspace.',
+content:`<p>Anthropic offers a computer use capability for some Claude environments, but availability varies by product, plan, and workspace configuration. Do not assume it is enabled in Claude Desktop or Cowork for your account.</p>
+<div class="warn-box">Treat this as an advanced optional feature. If you do not see computer-use controls in your Claude workspace, skip this section and use connectors or file-based workflows instead.</div>
+<h2>What the capability can do</h2>
+<ul><li>Observe screen state via screenshots</li><li>Click buttons, links, checkboxes, and menus</li><li>Type text and fill forms</li><li>Navigate between applications</li><li>Execute keyboard shortcuts</li></ul>
 <h2>Good use cases at RealPage</h2>
-<ul><li>Internal tools and dashboards with no API access</li><li>Legacy systems that predate modern integrations</li><li>Web portals that require complex login flows</li><li>Repetitive copy-paste work between apps that can't be connected directly</li></ul>
-<h2>Permission tiers</h2>
-<table><tr><th>Tier</th><th>What Claude can access</th><th>When to use</th></tr>
-<tr><td>UI Only</td><td>Visual elements — text, buttons, forms</td><td>Default — lowest risk</td></tr>
-<tr><td>App Control</td><td>Can open and interact with specific apps</td><td>Automating native apps</td></tr>
-<tr><td>System Access</td><td>File system, settings, system commands</td><td>Advanced only</td></tr></table>
-<div class="warn-box">Computer use runs on your real desktop — not in a sandbox. Your screen must be active (not locked). Claude will ask permission before accessing each new application. Available on Pro and Max plans only. Never use it with banking apps, password managers, or security software.</div>
-<h2>How to enable it</h2>
-<div class="step-flow"><div class="step-pill">Open a Cowork task</div><div class="step-arrow">→</div><div class="step-pill">Click "Use Computer"</div><div class="step-arrow">→</div><div class="step-pill">Grant app permission when prompted</div><div class="step-arrow">→</div><div class="step-pill">Describe what you want done</div></div>
-<div class="screenshot-placeholder"><span>Screenshot: Computer use permission dialog in Claude Desktop</span></div>`,
+<ul><li>Internal tools and dashboards with no API access</li><li>Legacy systems that predate modern integrations</li><li>Web portals that require complex login flows</li><li>Repetitive copy-paste work between apps that cannot be connected directly</li></ul>
+<div class="info-box">Prefer connectors, APIs, or file-based workflows first. Use computer use only if your workspace explicitly enables it and there is no better integration path.</div>
+<h2>Before you use it</h2>
+<ul><li>Confirm your workspace admin has enabled the feature for your account</li><li>Test it in a low-risk environment before using it on business workflows</li><li>Keep sensitive apps such as password managers, banking tools, and security consoles out of scope</li><li>Review outputs carefully before taking downstream action</li></ul>`,
 prompt:'Explain how Claude computer use works in Cowork and when I should use it vs. an MCP connector or browser automation. Give me 3 examples of real tasks at a company like RealPage where computer use would be the right choice.'},
 
 {dept:'core',id:'c-efficiency',num:'13',group:'Running Tasks',title:'Token efficiency',subtitle:'Get more done per session with a few simple habits.',
@@ -863,3 +865,5 @@ buildNav();
 updateProgress();
 showSection('c-welcome');
 </script>
+</body>
+</html>
